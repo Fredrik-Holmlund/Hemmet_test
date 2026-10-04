@@ -23,6 +23,7 @@ jobs:
       REALM: stitches
       GUILD: Frienship
       OUT: data/hc
+      PYTHONUNBUFFERED: "1"   # loggen syns medan den körs, inte först i slutet
     steps:
       - uses: actions/checkout@v4
 
@@ -33,7 +34,7 @@ jobs:
       - run: pip install pillow numpy
 
       - name: Bilder från förra körningen
-        uses: actions/cache@v4
+        uses: actions/cache/restore@v4
         with:
           path: |
             ${{ env.OUT }}/avatars
@@ -47,6 +48,17 @@ jobs:
           BNET_ID: ${{ secrets.BNET_ID }}
           BNET_SECRET: ${{ secrets.BNET_SECRET }}
         run: python scripts/fetch_hemmet.py --realm "$REALM" --guild "$GUILD" --out "$OUT"
+
+      # Sparas direkt, så att bilderna inte laddas ner igen om ett senare steg fallerar
+      - name: Spara bilderna
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ${{ env.OUT }}/avatars
+            ${{ env.OUT }}/icons
+            ${{ env.OUT }}/renders
+          key: bilder-${{ github.run_id }}
 
       - name: Bygg
         run: |
