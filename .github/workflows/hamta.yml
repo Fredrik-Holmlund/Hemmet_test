@@ -72,7 +72,7 @@ jobs:
           git add "$OUT/members.json" "$OUT/items.json" "$OUT/state.json" "$OUT/events.jsonl" "$OUT/snapshots"
           if git diff --cached --quiet; then echo "Inget nytt"; exit 0; fi
           git commit -m "Hämtning $(date -u +'%Y-%m-%d %H:%M') UTC"
-          git pull --rebase
+          git pull --rebase --autostash   # bygget ändrar filer i hemmet/ som inte ska med
           git push
 
       # Hoppas över tills SFTP-hemligheterna finns

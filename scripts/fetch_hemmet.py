@@ -210,7 +210,9 @@ def fetch_renders(members):
 
 def item_info(ids, cache):
     """Item level och ikon för items vi inte redan har."""
-    todo = [i for i in ids if str(i) not in cache]
+    # också de vars ikonfil saknas (items.json ligger i repot, ikonerna i Actions-cachen)
+    todo = [i for i in ids if str(i) not in cache
+            or (cache[str(i)].get("icon") and not (ICONS / f"{cache[str(i)]['icon']}.jpg").exists())]
     def one(i):
         d = get(f"/data/wow/item/{i}", STATIC_NS) or {}
         media = get(f"/data/wow/media/item/{i}", STATIC_NS) or {}
