@@ -177,11 +177,12 @@ Hamnar Forever i en ny namnrymd läggs den till i listan i `configure()`.
 ## Publicering
 
 **GitHub Actions** (`.github/workflows/hamta.yml`) kör hämtning och bygge var 30:e minut (och via "Run workflow"),
-committar datan (`members`, `items`, `state`, `events`, `snapshots`) tillbaka till repot och laddar upp `dist/`
-till one.com via SFTP. Porträtt, ikoner och helkroppsbilder ligger i Actions-cachen, inte i repot.
-Byggd `dist/` finns också som nedladdning under körningen i tre dagar.
+committar datan (`members`, `items`, `state`, `events`, `snapshots`) tillbaka till repot och publicerar `dist/`
+på **GitHub Pages**: https://fredrik-holmlund.github.io/Hemmet_test/ . Porträtt, ikoner och helkroppsbilder
+ligger i Actions-cachen, inte i repot. Boten committar var 30:e minut: kör `git pull` innan du ändrar lokalt.
 
-Secrets (Settings → Secrets and variables → Actions): `BNET_ID`, `BNET_SECRET` och för uppladdningen
-`SFTP_HOST`, `SFTP_USER`, `SFTP_PASSWORD`, `SFTP_PATH`. Utan `SFTP_HOST` hoppas uppladdningen över.
+Secrets (Settings → Secrets and variables → Actions): `BNET_ID`, `BNET_SECRET`.
+Pages: Settings → Pages → Source: GitHub Actions. Egen domän: skriv in den under Settings → Pages → Custom domain
+och lägg hos domänleverantören en CNAME för `www` → `fredrik-holmlund.github.io` samt GitHubs A-poster för domänen utan www.
 Realm och guild står överst i workflowen (`REALM`, `GUILD`): byt dem när HEMMET finns.
 Lokalt fungerar allt som förut med `.env`; Windows-schemat är avstängt.
