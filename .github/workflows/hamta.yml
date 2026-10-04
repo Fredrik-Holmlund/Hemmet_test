@@ -1,0 +1,83 @@
+# Hämtar guilden från Blizzard, bygger sidan och laddar upp den. Ersätter Windows-schemat.
+# Datan (snapshots, händelser, läge) committas tillbaka så att historiken växer i repot.
+# Bilderna (porträtt, ikoner, helkroppsbilder) sparas i Actions-cachen.
+name: Hämta och bygg
+
+on:
+  schedule:
+    - cron: "5,35 * * * *"   # var 30:e minut (GitHub kan komma några minuter sent)
+  workflow_dispatch:          # "Run workflow"-knappen
+
+concurrency:
+  group: hamta
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  hamta:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      REALM: stitches
+      GUILD: Frienship
+      OUT: data/hc
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - run: pip install pillow numpy
+
+      - name: Bilder från förra körningen
+        uses: actions/cache@v4
+        with:
+          path: |
+            ${{ env.OUT }}/avatars
+            ${{ env.OUT }}/icons
+            ${{ env.OUT }}/renders
+          key: bilder-${{ github.run_id }}
+          restore-keys: bilder-
+
+      - name: Hämta
+        env:
+          BNET_ID: ${{ secrets.BNET_ID }}
+          BNET_SECRET: ${{ secrets.BNET_SECRET }}
+        run: python scripts/fetch_hemmet.py --realm "$REALM" --guild "$GUILD" --out "$OUT"
+
+      - name: Bygg
+        run: |
+          python scripts/build_hemmet.py
+          python scripts/build_dist.py
+
+      - name: Spara datan i repot
+        run: |
+          git config user.name "hemmet-bot"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "$OUT/members.json" "$OUT/items.json" "$OUT/state.json" "$OUT/events.jsonl" "$OUT/snapshots"
+          if git diff --cached --quiet; then echo "Inget nytt"; exit 0; fi
+          git commit -m "Hämtning $(date -u +'%Y-%m-%d %H:%M') UTC"
+          git pull --rebase
+          git push
+
+      # Hoppas över tills SFTP-hemligheterna finns
+      - name: Ladda upp till webbhotellet
+        env:
+          SFTP_HOST: ${{ secrets.SFTP_HOST }}
+          SFTP_USER: ${{ secrets.SFTP_USER }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_PATH: ${{ secrets.SFTP_PATH }}
+        if: env.SFTP_HOST != ''
+        run: |
+          sudo apt-get install -y -qq lftp
+          lftp -u "$SFTP_USER,$SFTP_PASSWORD" "sftp://$SFTP_HOST" -e "set sftp:auto-confirm yes; mirror -R --verbose=1 dist/ $SFTP_PATH; quit"
+
+      - name: Sidan som nedladdning
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 3

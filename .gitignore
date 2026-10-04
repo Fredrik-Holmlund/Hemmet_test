@@ -1,0 +1,31 @@
+# Hemligheter
+.env
+
+# Wowheads modellfiler som proxyn cachar
+.cache/
+__pycache__/
+
+# Bilder som hämtas från Blizzard: ligger i Actions-cachen, inte i repot
+data/hc/avatars/
+data/hc/icons/
+data/hc/renders/
+data/hc/hamtning.log
+
+# Lokalt: demo, prober och byggen
+data/demo/
+data/demo-bas/
+data/bnet-probe/
+DEMO/
+DEMO_LIVE/
+dist/
+
+# Byggs av build_hemmet.py / build_demo.py
+hemmet/index.html
+hemmet/demo.html
+hemmet/live.html
+hemmet/avatars.webp
+hemmet/icons.webp
+hemmet/hero.webp
+hemmet/demo-*
+hemmet/live-*
+hemmet/renders/

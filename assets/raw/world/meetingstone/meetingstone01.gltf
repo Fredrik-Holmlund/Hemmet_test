@@ -1,0 +1,456 @@
+{
+	"asset": {
+		"version": "2.0",
+		"generator": "wow.export v0.2.19 win-x64 [019ef0d1-f6af-7000-ab76-dc1a6df0f93c]"
+	},
+	"nodes": [
+		{
+			"name": "meetingstone01",
+			"children": [
+				1,
+				8,
+				9
+			]
+		},
+		{
+			"name": "meetingstone01_skeleton",
+			"children": [
+				2,
+				4,
+				6
+			]
+		},
+		{
+			"name": "bone_0_p",
+			"translation": [
+				-0.41535842418670654,
+				0.031178580597043037,
+				0.1548016369342804
+			],
+			"children": [
+				3
+			]
+		},
+		{
+			"name": "bone_0"
+		},
+		{
+			"name": "bone_1_p",
+			"translation": [
+				1.886117696762085,
+				6.206058502197266,
+				-0.12132654339075089
+			],
+			"children": [
+				5
+			]
+		},
+		{
+			"name": "bone_1"
+		},
+		{
+			"name": "bone_2_p",
+			"translation": [
+				-1.0493000745773315,
+				6.269079685211182,
+				-0.0591183640062809
+			],
+			"children": [
+				7
+			]
+		},
+		{
+			"name": "bone_2"
+		},
+		{
+			"name": "meetingstone01_Geoset0",
+			"mesh": 0,
+			"skin": 0
+		},
+		{
+			"name": "meetingstone01_Geoset1",
+			"mesh": 1,
+			"skin": 0
+		}
+	],
+	"scenes": [
+		{
+			"name": "meetingstone01_Scene",
+			"nodes": [
+				0
+			]
+		}
+	],
+	"buffers": [
+		{
+			"byteLength": 11865,
+			"uri": "meetingstone01.bin"
+		}
+	],
+	"bufferViews": [
+		{
+			"buffer": 0,
+			"byteLength": 2676,
+			"byteOffset": 0,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 2676,
+			"byteOffset": 2676,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 892,
+			"byteOffset": 5352,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 892,
+			"byteOffset": 6244,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 192,
+			"byteOffset": 7136
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1784,
+			"byteOffset": 7328,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 1784,
+			"byteOffset": 9112,
+			"target": 34962
+		},
+		{
+			"buffer": 0,
+			"byteLength": 390,
+			"byteOffset": 10896,
+			"target": 34963
+		},
+		{
+			"buffer": 0,
+			"byteLength": 579,
+			"byteOffset": 11286,
+			"target": 34963
+		}
+	],
+	"accessors": [
+		{
+			"name": "POSITION",
+			"bufferView": 0,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 223,
+			"type": "VEC3",
+			"min": [
+				-2.0301125049591064,
+				-0.23933427035808563,
+				-3.023228883743286
+			],
+			"max": [
+				2.5925092697143555,
+				9.040522575378418,
+				3.0554139614105225
+			]
+		},
+		{
+			"name": "NORMAL",
+			"bufferView": 1,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 223,
+			"type": "VEC3",
+			"min": [
+				-0.997999906539917,
+				-0.9723305106163025,
+				-0.9975965619087219
+			],
+			"max": [
+				0.9939869046211243,
+				0.9964203238487244,
+				0.997140109539032
+			]
+		},
+		{
+			"name": "JOINTS_0",
+			"byteOffset": 0,
+			"componentType": 5121,
+			"count": 223,
+			"type": "VEC4",
+			"bufferView": 2,
+			"min": [
+				0,
+				0,
+				0,
+				0
+			],
+			"max": [
+				0,
+				0,
+				0,
+				0
+			]
+		},
+		{
+			"name": "WEIGHTS_0",
+			"byteOffset": 0,
+			"componentType": 5121,
+			"count": 223,
+			"normalized": true,
+			"type": "VEC4",
+			"bufferView": 3,
+			"min": [
+				255,
+				0,
+				0,
+				0
+			],
+			"max": [
+				255,
+				0,
+				0,
+				0
+			]
+		},
+		{
+			"name": "INV_BIND_MATRICES",
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 3,
+			"type": "MAT4",
+			"bufferView": 4,
+			"min": [
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				-1.886117696762085,
+				-6.269079685211182,
+				-0.1548016369342804,
+				1
+			],
+			"max": [
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				0,
+				0,
+				0,
+				1,
+				0,
+				1.0493000745773315,
+				-0.031178580597043037,
+				0.12132654339075089,
+				1
+			]
+		},
+		{
+			"name": "TEXCOORD_0",
+			"bufferView": 5,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 223,
+			"type": "VEC2",
+			"min": [
+				0.0007615848444402218,
+				-0.6479623317718506
+			],
+			"max": [
+				1.0116620063781738,
+				1.7107105255126953
+			]
+		},
+		{
+			"name": "TEXCOORD_1",
+			"bufferView": 6,
+			"byteOffset": 0,
+			"componentType": 5126,
+			"count": 223,
+			"type": "VEC2",
+			"min": [
+				0,
+				0
+			],
+			"max": [
+				0,
+				0
+			]
+		},
+		{
+			"bufferView": 7,
+			"byteOffset": 0,
+			"componentType": 5121,
+			"count": 390,
+			"type": "SCALAR"
+		},
+		{
+			"bufferView": 8,
+			"byteOffset": 0,
+			"componentType": 5121,
+			"count": 579,
+			"type": "SCALAR"
+		}
+	],
+	"meshes": [
+		{
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"JOINTS_0": 2,
+						"WEIGHTS_0": 3,
+						"TEXCOORD_0": 5,
+						"TEXCOORD_1": 6
+					},
+					"indices": 7,
+					"mode": 4,
+					"material": 1
+				}
+			]
+		},
+		{
+			"primitives": [
+				{
+					"attributes": {
+						"POSITION": 0,
+						"NORMAL": 1,
+						"JOINTS_0": 2,
+						"WEIGHTS_0": 3,
+						"TEXCOORD_0": 5,
+						"TEXCOORD_1": 6
+					},
+					"indices": 8,
+					"mode": 4,
+					"material": 2
+				}
+			]
+		}
+	],
+	"scene": 0,
+	"skins": [
+		{
+			"name": "meetingstone01_Armature",
+			"joints": [
+				3,
+				5,
+				7
+			],
+			"inverseBindMatrices": 4,
+			"skeleton": 0
+		}
+	],
+	"animations": [
+		{
+			"samplers": [],
+			"channels": [],
+			"name": "Stand (ID 0 variation 0)"
+		}
+	],
+	"images": [
+		{
+			"uri": "..\\..\\nightelf\\passivedoodads\\magicalimplements\\glow.png"
+		},
+		{
+			"uri": "meetingstone01.png"
+		},
+		{
+			"uri": "..\\..\\passivedoodads\\bindstone\\bindstonesign07.png"
+		},
+		{
+			"uri": "..\\..\\..\\skillactivated\\tradeskillnodes\\bindstonereflect.png"
+		}
+	],
+	"textures": [
+		{
+			"source": 0
+		},
+		{
+			"source": 1
+		},
+		{
+			"source": 2
+		},
+		{
+			"source": 3
+		}
+	],
+	"materials": [
+		{
+			"name": "glow",
+			"emissiveFactor": [
+				0,
+				0,
+				0
+			],
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 0
+				},
+				"metallicFactor": 0
+			}
+		},
+		{
+			"name": "meetingstone01",
+			"emissiveFactor": [
+				0,
+				0,
+				0
+			],
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 1
+				},
+				"metallicFactor": 0
+			}
+		},
+		{
+			"name": "bindstonesign07",
+			"emissiveFactor": [
+				0,
+				0,
+				0
+			],
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 2
+				},
+				"metallicFactor": 0
+			}
+		},
+		{
+			"name": "bindstonereflect",
+			"emissiveFactor": [
+				0,
+				0,
+				0
+			],
+			"pbrMetallicRoughness": {
+				"baseColorTexture": {
+					"index": 3
+				},
+				"metallicFactor": 0
+			}
+		}
+	]
+}

@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="sv">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HEMMET · typografi</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Marcellus&family=Barlow+Condensed:wght@500;600&family=Spectral:ital,wght@0,400;0,600;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* Testsida: samma kort i två typografiska riktningar. Laddas inte upp (finns inte i build_dist). */
+:root { color-scheme: dark; --bg: #04070f; --s1: #0a1020; --line: rgba(244,237,228,.1); --text: #f4ede4; --body: #c9bfb5; --muted: #a3978c; --faint: #6f655d; --gold: #f0d27a; --brand: #d9a93f; --epic: #a335ee; }
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--body); font: 400 16px/1.6 "Open Sans", sans-serif; font-synthesis: none; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 24px 16px 60px; }
+.cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+@media (max-width: 800px) { .cols { grid-template-columns: minmax(0, 1fr); } }
+.dir { border: 1px solid var(--line); border-radius: 10px; padding: 22px 20px; background: linear-gradient(180deg, var(--s1), var(--bg)); display: grid; gap: 18px; align-content: start; }
+.tag { font: 600 12px/1 "Barlow Condensed", sans-serif; letter-spacing: .2em; text-transform: uppercase; color: var(--faint); }
+.tag b { display: block; margin-top: 8px; font: 400 22px/1.2 Marcellus, serif; letter-spacing: 0; text-transform: none; color: var(--text); }
+.tag span { display: block; margin-top: 6px; font: 400 13px/1.45 "Open Sans", sans-serif; letter-spacing: 0; text-transform: none; color: var(--muted); }
+
+/* roller; varje riktning sätter sina typsnitt */
+.eyebrow { font: var(--w-cap) var(--s-cap) var(--f-cap); letter-spacing: var(--sp-cap); text-transform: uppercase; color: var(--brand); }
+.h { margin: 6px 0 10px; font: var(--w-head) var(--s-head)/1.05 var(--f-head); color: var(--text); letter-spacing: var(--sp-head); }
+.lede { margin: 0; font: 400 16px/1.6 var(--f-text); color: var(--body); }
+.src { font: 500 13px/1 var(--f-meta); color: var(--faint); display: flex; gap: 8px; align-items: center; }
+.src::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: #6fd08c; box-shadow: 0 0 8px #6fd08c; }
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.kpi { background: var(--s1); padding: 14px; }
+.kpi b { display: block; font: var(--w-num) 30px/1 var(--f-num); color: var(--text); font-variant-numeric: lining-nums; }
+.kpi span { display: block; margin-top: 7px; font: var(--w-cap) 11px/1.25 var(--f-cap); letter-spacing: var(--sp-cap); text-transform: uppercase; color: var(--faint); }
+.card { border: 1px solid var(--line); border-radius: 8px; background: var(--s1); padding: 14px 16px; display: grid; gap: 8px; }
+.lbl { font: var(--w-cap) 11px/1 var(--f-cap); letter-spacing: var(--sp-cap); text-transform: uppercase; color: var(--brand); }
+.who { display: flex; align-items: center; gap: 10px; }
+.pf { width: 34px; height: 34px; border-radius: 50%; flex: none; background: radial-gradient(circle at 50% 30%, #6a5a3a, #0a0f1a 75%); box-shadow: 0 0 0 2px var(--c), 0 0 0 3.5px var(--bg); }
+.name { font: 400 18px/1.1 var(--f-name); color: var(--c); }
+.val { font: var(--w-num) 32px/1 var(--f-num); color: var(--text); font-variant-numeric: lining-nums; }
+.sub { font: 400 13px/1.35 var(--f-text); color: var(--faint); }
+.crown { border-color: color-mix(in srgb, var(--epic) 60%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--epic) 16%, transparent), var(--s1) 60%); }
+.crown .top { display: flex; align-items: baseline; gap: 8px; }
+.crown .top span, .crown .top em { font: var(--w-cap) 11px/1 var(--f-cap); font-style: normal; letter-spacing: var(--sp-cap); text-transform: uppercase; color: var(--faint); }
+.crown .top em { margin-left: auto; color: var(--epic); }
+.crown .top b { font: var(--w-num) 26px/1 var(--f-num); color: var(--epic); }
+.row { display: grid; grid-template-columns: 22px 30px minmax(0, 1fr) auto; gap: 10px; align-items: center; padding: 8px 0; border-top: 1px solid var(--line); }
+.row:first-child { border-top: 0; }
+.row .n { font: var(--w-num) 13px/1 var(--f-num); color: var(--faint); }
+.row .pf { width: 30px; height: 30px; }
+.row .name { font-size: 16px; }
+.row .v { font: var(--w-num) 16px/1 var(--f-num); color: var(--text); }
+.tick { border-block: 1px solid var(--line); padding: 10px 0; white-space: nowrap; overflow: hidden; font: 400 14px/1 var(--f-text); color: var(--muted); }
+.tick b { font: 400 15px/1 var(--f-name); }
+.tick em { font-style: normal; color: var(--gold); }
+.tick i { font-style: normal; color: var(--gold); margin: 0 10px; font-size: 9px; }
+.read { margin: 0; font: 400 15px/1.5 var(--f-text); color: var(--muted); }
+.read b { font-weight: 600; color: var(--gold); }
+.btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.btn { padding: 13px 22px; border-radius: 4px; font: var(--w-btn) 15px/1 var(--f-btn); letter-spacing: var(--sp-btn); text-transform: var(--tt-btn); color: #f4ede4; border: 1px solid rgba(244,237,228,.2); background: rgba(255,255,255,.02); }
+.btn.p { background: linear-gradient(180deg, #2a58bd, #1b3a86); border-color: transparent; box-shadow: 0 0 0 1px #d9a93f inset; }
+
+/* NU: Cinzel rubriker + siffror · Marcellus namn · Spectral text · Barlow versaler, status och knappar */
+.nu { --f-head: Cinzel, serif; --w-head: 600; --s-head: 32px; --sp-head: .02em;
+      --f-cap: "Barlow Condensed", sans-serif; --w-cap: 600; --s-cap: 12px; --sp-cap: .2em;
+      --f-name: Marcellus, serif; --f-num: Cinzel, serif; --w-num: 500; --f-text: Spectral, serif; --f-meta: "Barlow Condensed", sans-serif;
+      --f-btn: "Barlow Condensed", sans-serif; --w-btn: 600; --sp-btn: .12em; --tt-btn: uppercase; }
+/* BLIZZARD: som Forever-sidan. Marcellus (i stället för Friz Quadrata) för allt som är spel, Open Sans för allt man läser och alla siffror */
+.bz { --f-head: Marcellus, serif; --w-head: 400; --s-head: 36px; --sp-head: 0;
+      --f-cap: Marcellus, serif; --w-cap: 400; --s-cap: 14px; --sp-cap: .04em;
+      --f-name: Marcellus, serif; --f-num: "Open Sans", sans-serif; --w-num: 600; --f-text: "Open Sans", sans-serif; --f-meta: "Open Sans", sans-serif;
+      --f-btn: Marcellus, serif; --w-btn: 400; --sp-btn: .02em; --tt-btn: none; }
+</style>
+<div class="wrap">
+  <div class="cols">
+    <section class="dir nu" aria-label="Nu"></section>
+    <section class="dir bz" aria-label="Blizzard"></section>
+  </div>
+</div>
+<script>
+const META = {
+  nu: ["Nu", "Cinzel rubriker och siffror · Marcellus namn · Spectral text · Barlow versaler, status och knappar. Fyra typsnitt."],
+  bz: ["Blizzard", "Som Forever-sidan: ett spel-typsnitt (Marcellus i stället för Friz Quadrata) för rubriker, etiketter, knappar och namn, och Open Sans för text och siffror. Två typsnitt."],
+};
+const body = `
+  <div><div class="eyebrow">Resan till 60</div><h2 class="h">Hela guilden, dag för dag</h2><p class="lede">Varje porträtt är en medlem, placerad på sin level. Spola i tiden och se guilden röra sig.</p></div>
+  <div class="btns"><span class="btn p">Gå med i Discord</span><span class="btn">Se resan</span></div>
+  <div class="src">Uppdaterad 22:46</div>
+  <div class="kpis"><div class="kpi"><b>958</b><span>på resan</span></div><div class="kpi"><b>393</b><span>på level 60</span></div><div class="kpi"><b>48</b><span>medianlevel</span></div><div class="kpi"><b>+0</b><span>levels senaste dagen</span></div></div>
+  <div class="card crown"><div class="top"><span>Level</span><b>50</b><em>Epic</em></div>
+    <div class="who"><div class="pf" style="--c:#AAD372"></div><div><div class="name" style="--c:#AAD372">Elaiala</div><div class="sub">29 sep 22:39</div></div></div></div>
+  <div class="card"><div class="lbl">Längsta passet</div>
+    <div class="who"><div class="pf" style="--c:#AAD372"></div><div class="name" style="--c:#AAD372">Adehunts</div></div>
+    <div class="val">33 min</div><div class="sub">29 sep, från kl 18:44 · uppskattat</div></div>
+  <div class="card" style="padding-block:6px">
+    <div class="row"><span class="n">1</span><div class="pf" style="--c:#F48CBA"></div><div><div class="name" style="--c:#F48CBA">Lightbeam</div><div class="sub">level 60 Paladin</div></div><span class="v">86</span></div>
+    <div class="row"><span class="n">2</span><div class="pf" style="--c:#F48CBA"></div><div><div class="name" style="--c:#F48CBA">Kronoss</div><div class="sub">level 60 Paladin</div></div><span class="v">85</span></div>
+  </div>
+  <div class="tick">Först till 30: <b style="color:#8788EE">Siniel</b><i>◆</i><b style="color:#FF7C0A">Kalloth</b> ⯈ <em>20</em><i>◆</i>Guildens mitt: level <em>48</em></div>
+  <p class="read"><b>0 %</b> av dingarna togs när man borde sova och <b>100 %</b> på ledig tid. Flest kl <b>20–21</b>.</p>`;
+for (const [k, [t, d]] of Object.entries(META)) document.querySelector(`.dir.${k}`).innerHTML = `<div class="tag">Riktning<b>${t}</b><span>${d}</span></div>` + body;
+</script>
+</html>

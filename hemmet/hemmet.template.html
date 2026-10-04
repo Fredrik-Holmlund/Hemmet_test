@@ -1,0 +1,865 @@
+<meta charset="utf-8">
+<title>HEMMET</title>
+<meta name="description" content="<HEMMET> – en guild för spelare från många gamla gäng. PUGs among friends i WoW Forever.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Marcellus&family=Open+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+/* Layout: guildsidans mörka obsidian-värld (samma formspråk som roids-sidan): glödande hero, luftiga sektioner, mono-siffror, zonkonst som ljus i bakgrunden. */
+:root {
+  color-scheme: dark;
+  --obsidian-950: #04070f; --obsidian-900: #0a1020; --obsidian-850: #0e1628; --obsidian-800: #121b30;
+  --azure-600: #1b3a86; --azure-500: #2a58bd; --azure-400: #5b8ff0; --azure-300: #9dbdf7;
+  --navy-500: #343c7a; --navy-600: #222a56;   /* Alliance-bannerns blå: knappar och valda flikar */
+  --gold-300: #f0d27a; --gold-400: #d9a93f; --gold-500: #b0822a;
+  --bone-50: #f4ede4; --ash-200: #c9bfb5; --ash-300: #a3978c; --stone-400: #6f655d;
+  --line: rgba(244, 237, 228, .1); --line-strong: rgba(244, 237, 228, .2);
+  --bg: var(--obsidian-950); --surface: var(--obsidian-900);
+  --text-primary: var(--bone-50); --text-body: var(--ash-200); --text-muted: var(--ash-300); --text-faint: var(--stone-400);
+  --brand: var(--gold-400); --good: #6fd08c;
+  --font-display: "Cinzel", Georgia, serif;
+  /* Typografi som Blizzards Forever-sida, med Cinzel som rubrik:
+       Cinzel    (--font-display)           logga och rubriker
+       Marcellus (--font-ui, --font-label)  det som i spelet står i Friz Quadrata: små rubriker, etiketter, knappar, meny, namn
+       Open Sans (--font-body, --font-num)  allt man läser, statusraden och alla siffror
+     Marcellus har bara en vikt: hierarki med storlek och färg, aldrig fetstil. */
+  --font-ui: "Marcellus", Georgia, serif;
+  --font-label: "Marcellus", Georgia, serif;
+  --font-body: "Open Sans", system-ui, sans-serif;
+  --font-num: "Open Sans", system-ui, sans-serif;
+  --cap: .08em;
+  --fs-hero: clamp(64px, 14vw, 200px);
+  --fs-d1: clamp(40px, 6vw, 84px);
+  --fs-d2: clamp(30px, 4.2vw, 54px);
+  --ease: cubic-bezier(.16, 1, .3, 1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }   /* annars vinner t.ex. .player { display: grid } över hidden */
+html { scroll-behavior: smooth; font-synthesis: none; }
+body { margin: 0; background: var(--bg); color: var(--text-body); font: 400 16px/1.7 var(--font-body); overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+button, input { font: inherit; color: inherit; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--gold-300); outline-offset: 3px; }
+.wrap { max-width: 1200px; margin-inline: auto; padding-inline: 16px; }
+.narrow { max-width: 780px; margin-inline: auto; padding-inline: 16px; }
+section { padding-block: clamp(72px, 10vw, 140px); }
+.eyebrow { display: flex; align-items: center; gap: 12px; margin: 0 0 18px; font: 600 16px/1.2 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand);
+  -webkit-text-stroke: .45px currentColor; }   /* Marcellus har ingen fet vikt: en tunn kontur i samma färg gör den fetare */
+/* siffror i etiketter: aldrig Marcellus */
+.n { font-family: var(--font-body); font-style: normal; font-weight: 700; letter-spacing: .02em; -webkit-text-stroke: 0; }
+.eyebrow::before { content: ""; width: 7px; height: 7px; background: var(--brand); transform: rotate(45deg); flex: none; }
+.d1, .d2 { font-family: var(--font-display); font-weight: 600; color: var(--text-primary); letter-spacing: .03em; line-height: 1.04; margin: 0 0 22px; text-wrap: balance; }
+.d1 { font-size: var(--fs-d1); } .d2 { font-size: var(--fs-d2); }
+.d1 span, .d2 span, .quote blockquote span { color: var(--gold-300); }   /* rubrikens bärande del i guld, som "of Guilds" */
+.quote { margin: 90px auto 0; max-width: 900px; text-align: center; }
+.quote blockquote { margin: 0; font: 600 clamp(34px, 5.6vw, 72px)/1.05 var(--font-display); letter-spacing: .02em; color: var(--text-primary); text-wrap: balance; }
+.quote figcaption { margin-top: 18px; }
+.lede { font-size: clamp(17px, 1.4vw, 19px); line-height: 1.65; margin: 0; max-width: 60ch; }
+.src { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+.src::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--good); box-shadow: 0 0 10px var(--good); flex: none; }
+
+.btn { display: inline-flex; align-items: center; gap: 10px; padding: 15px 26px; border-radius: 4px; border: 1px solid transparent; cursor: pointer; text-decoration: none;
+  font: 600 15px/1 var(--font-label); letter-spacing: .12em; text-transform: uppercase; transition: transform .2s, background-color .2s, border-color .2s, color .2s; }
+.btn:hover { transform: translateY(-1px); }
+.btn svg { width: 18px; height: 18px; }
+.btn--primary { background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); color: var(--gold-300); box-shadow: 0 0 0 1px var(--gold-400) inset, 0 10px 30px -12px rgba(52, 60, 122, .9); }
+.btn--ghost { background: rgba(255, 255, 255, .02); border-color: var(--line-strong); color: var(--text-primary); }
+.btn--ghost:hover { border-color: var(--text-muted); }
+.btn--sm { padding: 9px 14px; font-size: 13px; }
+/* valt = bannerns marinblå med guldkant och guldtext, som Discord-knappen: blått är det man gör, guld det man uppnår */
+.btn[aria-pressed="true"] { background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); color: var(--gold-300); border-color: transparent; box-shadow: 0 0 0 1px var(--gold-400) inset; }
+
+/* ========== TOPBAR ========== */
+.topbar { position: fixed; top: 0; left: 0; right: 0; z-index: 30; display: flex; align-items: center; justify-content: space-between; gap: 18px;
+  padding: calc(env(safe-area-inset-top, 0px) + 12px) 16px 12px; background: rgba(4, 7, 15, .6); backdrop-filter: blur(14px) saturate(1.3);
+  border-bottom: 1px solid var(--line); transform: translateY(-100%); transition: transform .5s var(--ease); }
+.topbar.is-visible { transform: none; }
+.topbar__brand { display: flex; align-items: center; gap: 10px; text-decoration: none; font: 700 17px/1 var(--font-display); letter-spacing: .14em; color: var(--text-primary); flex: none; }
+.topbar__brand svg { width: 26px; height: 26px; color: var(--gold-300); }
+.topbar nav { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; }
+.topbar nav a { font: 600 14px/1 var(--font-body); text-decoration: none;   /* menyn är ram, inte spel: Open Sans som på Blizzards Forever-sida */ color: var(--text-muted); white-space: nowrap; }
+.topbar nav a:hover { color: var(--text-primary); }
+
+/* ========== HERO ========== */
+.hero { position: relative; min-height: min(78svh, 780px); display: grid; align-content: center; justify-items: center; text-align: center; overflow: hidden;
+  padding: calc(env(safe-area-inset-top, 0px) + 90px) 16px 90px; isolation: isolate; }
+.hero__art { position: absolute; inset: 0; z-index: -2; background: url("zones/elwynn.webp") center 35% / cover; filter: grayscale(.5) brightness(.55) contrast(1.1); opacity: .5;
+  -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 75%); mask-image: radial-gradient(ellipse 70% 60% at 50% 45%, #000 20%, transparent 75%); }
+/* Med ett foto (assets/raw/hero/ → hero.webp): hela bilden i färg, tonad mot mörkt nedåt så att texten syns */
+.hero.has-photo .hero__art { background: url("hero.webp") center 40% / cover; filter: saturate(1.1) brightness(.74); opacity: 1;
+  -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 98%); mask-image: linear-gradient(180deg, #000 55%, transparent 98%); }
+/* vinjett: kanterna mörknar mot sidans bakgrund, mitten (texten) lämnas ljus */
+.hero.has-photo .hero__glow { background: radial-gradient(ellipse 55% 40% at 50% 45%, rgba(4,7,15,.38), transparent 75%), linear-gradient(180deg, rgba(4,7,15,.3), transparent 30%),
+  radial-gradient(ellipse 75% 85% at 50% 42%, transparent 40%, rgba(4,7,15,.55) 75%, rgba(4,7,15,.9) 100%); }
+.hero__glow { position: absolute; inset: 0; z-index: -1; background: radial-gradient(ellipse 60% 45% at 50% 60%, rgba(42, 88, 189, .35), transparent 70%), radial-gradient(ellipse 40% 30% at 50% 38%, rgba(217, 169, 63, .14), transparent 70%); }
+.hero canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.hero__sigil { width: 64px; height: 64px; margin-bottom: 20px; color: var(--gold-300); filter: drop-shadow(0 0 18px rgba(217, 169, 63, .5)); }
+.hero__meta { font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-muted); margin: 0 0 14px; }
+.hero__meta b { color: var(--brand); font-weight: 600; }
+.hero h1 { margin: 0; font: 700 var(--fs-hero)/.9 var(--font-display); letter-spacing: .04em; color: var(--text-primary); filter: drop-shadow(0 6px 30px rgba(0, 0, 0, .6)); }
+.hero h1 .ch { display: inline-block; animation: rise 1.1s var(--ease) both; animation-delay: calc(var(--i) * 80ms + 150ms);
+  background: linear-gradient(180deg, #fff8ea 30%, #c9b18a); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+@keyframes rise { from { transform: translateY(.3em); opacity: .1; filter: blur(8px); } }
+/* guldraden i Marcellus: "Välkommen hem." i heron och sist på sidan, och undertexten till "A Guild of Guilds" */
+.hero__slogan, .slogan { margin: 18px 0 0; font: 400 clamp(22px, 3vw, 34px)/1.3 var(--font-ui); color: var(--gold-300); }
+.hero__count { display: flex; gap: clamp(18px, 4vw, 44px); justify-content: center; margin-top: 34px; }
+.hero__count div { display: grid; gap: 6px; min-width: 64px; }
+.hero__count b { font: 500 clamp(34px, 5vw, 56px)/1 var(--font-num); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.hero__count span { font: 600 12px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-faint); }
+.hero__count-lbl { margin: 18px 0 0; font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-muted); }
+.hero .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 40px; }
+.hero__scroll { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); color: var(--text-faint); }
+.hero__scroll svg { width: 20px; animation: bob 2.2s ease-in-out infinite; }
+@keyframes bob { 50% { transform: translateY(6px); } }
+
+/* ========== FÖRHANDSVISNINGEN ========== */
+.demo-badge { position: fixed; right: 14px; bottom: calc(env(safe-area-inset-bottom, 0px) + 14px); z-index: 40; padding: 8px 12px; border-radius: 4px; pointer-events: none;
+  font: 400 13px/1 var(--font-label); letter-spacing: .08em; text-transform: uppercase; color: var(--gold-300);
+  background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); box-shadow: 0 0 0 1px var(--gold-400) inset, 0 8px 24px -8px rgba(0,0,0,.8); }
+
+.ticker { border-block: 1px solid var(--line); background: rgba(10, 16, 32, .6); overflow: hidden; }
+.ticker__row { display: flex; align-items: center; gap: 40px; width: max-content; padding: 14px 0; animation: marquee 60s linear infinite; }
+.ticker:hover .ticker__row { animation-play-state: paused; }
+.ticker__row span { font: 500 15px/1 var(--font-body); letter-spacing: .02em; color: var(--text-muted); white-space: nowrap; }
+.ticker__row b { font: 600 15px/1 var(--font-ui); letter-spacing: .04em; }
+.ticker__row em { font-style: normal; color: var(--text-primary); }
+.ticker__row .mile em { color: var(--gold-300); }
+@keyframes marquee { to { transform: translateX(-50%); } }
+
+.sr-box { border: 1px solid var(--line); border-radius: 8px; background: var(--surface); overflow: hidden; }
+.sr-item { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 14px; align-items: center; padding: 18px 20px; border-bottom: 1px solid var(--line); }
+.sr-item__ico { width: 44px; height: 44px; border-radius: 6px; background: url("ach/raptor.jpg") center / cover; box-shadow: 0 0 0 1px #a335ee, 0 0 16px rgba(163, 53, 238, .4); }
+.sr-item h4 { margin: 0; font: 600 17px/1.2 var(--font-ui); letter-spacing: .03em; color: #c77dff; }
+.sr-item small { font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+.sr-rolls { display: grid; gap: 8px; padding: 16px 20px 20px; }
+.sr-roll { display: grid; grid-template-columns: minmax(0, 1fr) minmax(60px, 120px) 40px; gap: 12px; align-items: center; font: 600 17px/1 var(--font-ui); letter-spacing: .03em; }
+.sr-roll__bar { height: 6px; border-radius: 3px; background: var(--obsidian-800); overflow: hidden; }
+.sr-roll__bar i { display: block; height: 100%; width: 0; background: var(--text-muted); transition: width .9s var(--ease); }
+.sr-roll b { font: 600 16px/1 var(--font-num); text-align: right; color: var(--text-primary); }
+.sr-roll.win .sr-roll__bar i { background: linear-gradient(90deg, var(--gold-500), var(--gold-300)); }
+.sr-roll.win b { color: var(--gold-300); }
+.sr-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); background: rgba(0, 0, 0, .2); }
+.sr-foot p { margin: 0; font: 500 17px/1.4 var(--font-body); letter-spacing: .03em; color: var(--text-muted); }
+.note { margin-top: 18px; font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+
+/* ========== RESAN ========== */
+.journey { background: linear-gradient(180deg, var(--bg), var(--obsidian-900) 15%, var(--obsidian-900) 85%, var(--bg)); }
+.player { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 62px); z-index: 20; margin: 12px 0 0; padding: 12px 18px; border-radius: 8px;
+  display: grid; grid-template-columns: auto auto minmax(0, 1fr); gap: 18px; align-items: center; background: rgba(14, 22, 40, .82); backdrop-filter: blur(12px); border: 1px solid var(--line); box-shadow: 0 20px 40px -20px rgba(0, 0, 0, .8); }
+.player__play { width: 46px; height: 46px; border-radius: 50%; border: 0; cursor: pointer; display: grid; place-items: center;
+  background: linear-gradient(180deg, var(--gold-300), var(--gold-500)); color: var(--obsidian-950); box-shadow: 0 0 24px rgba(217, 169, 63, .35); }   /* hela tidslinjen är guld: den visar hur långt resan kommit */
+.player__play svg { width: 18px; height: 18px; }
+.player__day { min-width: 110px; }
+.player__day b { display: block; font: 600 22px/1 var(--font-num); color: var(--text-primary); font-variant-numeric: tabular-nums; }
+.player__day span { font: 600 12px/1.4 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-faint); }
+input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 26px; background: transparent; cursor: pointer; }
+input[type="range"]::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--gold-300) var(--p, 100%), rgba(244, 237, 228, .14) var(--p, 100%)); }
+input[type="range"]::-moz-range-track { height: 4px; border-radius: 2px; background: rgba(244, 237, 228, .14); }
+input[type="range"]::-moz-range-progress { height: 4px; background: var(--gold-300); }
+input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; margin-top: -7px; border-radius: 50%; background: var(--bone-50); box-shadow: 0 0 0 4px rgba(240, 210, 122, .3); }
+input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; border: 0; border-radius: 50%; background: var(--bone-50); }
+
+/* nyckeltalen på pergament: ställningen just nu */
+.kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid rgba(0,0,0,.7); border-radius: 6px; overflow: hidden; margin: 22px 0 14px;
+  background: linear-gradient(90deg, rgba(16,10,3,.78), rgba(16,10,3,.62)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.kpi { padding: 18px 22px; text-shadow: 0 1px 2px #000; }
+.kpi + .kpi { border-left: 1px solid rgba(0,0,0,.4); box-shadow: inset 1px 0 0 rgba(255,235,190,.06); }
+.kpi b { display: block; font: 500 clamp(30px, 3.4vw, 44px)/1 var(--font-num); color: var(--text-primary); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.kpi span { display: block; margin-top: 8px; font: 600 12px/1.3 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--gold-300); -webkit-text-stroke: .35px currentColor; }
+
+.board-scroll { overflow-x: auto; scrollbar-color: var(--stone-400) transparent; padding-bottom: 6px; }
+.board { position: relative; height: 420px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); background: var(--obsidian-950); }
+.zseg { position: absolute; top: 0; bottom: 36px; border-right: 1px solid rgba(244, 237, 228, .05); overflow: hidden; }
+.zseg::before { content: ""; position: absolute; inset: 0; background: var(--art) center / cover; opacity: .3; filter: saturate(.8); -webkit-mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); transition: opacity .6s, filter .6s; }
+.zseg span { position: absolute; top: 14px; left: 0; right: 0; text-align: center; font: 600 12px/1.2 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-muted); padding-inline: 3px; }
+.zseg.fog::before { opacity: .06; filter: grayscale(1); }
+.zseg.fog span { color: var(--text-faint); }
+.axis { position: absolute; left: 0; right: 0; bottom: 0; height: 36px; border-top: 1px solid var(--line); }
+.axis span { position: absolute; top: 11px; transform: translateX(-50%); font: 500 11px/1 var(--font-num); color: var(--text-muted); }
+.tok { --s: var(--ts, 22px); position: absolute; margin-left: calc(var(--s) / -2); z-index: 2;   /* --ts: storlek efter kolumnbredd (sätts i app.js) */
+  transition: left .45s var(--ease), bottom .45s var(--ease), opacity .4s, transform .2s; }
+.tok:hover { transform: scale(1.8); z-index: 5; }
+.tok.me { --s: calc(var(--ts, 22px) * 1.35); box-shadow: 0 0 0 2px var(--c), 0 0 0 4px var(--bg), 0 0 0 6px var(--bone-50), 0 0 22px var(--bone-50); z-index: 4; }
+.tok.out { opacity: 0; pointer-events: none; }
+.leadflag { position: absolute; z-index: 3; transform: translateX(-50%); transition: left .45s var(--ease), bottom .45s var(--ease); pointer-events: none;
+  font: 600 12px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--gold-300); white-space: nowrap; }
+.leadflag::after { content: ""; display: block; width: 1px; height: 14px; margin: 5px auto 0; background: var(--gold-300); }
+.leadflag.end { transform: translateX(-88%); }            /* längst till höger: texten hålls innanför kanten */
+.leadflag.end::after { margin: 5px 12% 0 auto; }
+.leadflag.start { transform: translateX(-12%); }            /* längst till vänster (vid releasen) */
+.leadflag.start::after { margin: 5px auto 0 12%; }
+.tok:not(.img):not(.out) { opacity: .28; }                /* ingen profil hos Blizzard (inte inloggad på länge): bara en skugga */
+.dayline { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 12px 0 0; padding: 13px 18px; border-radius: 6px; font: 400 17px/1.5 var(--font-body); color: var(--text-body);
+  border: 1px solid rgba(240,210,122,.35); background: linear-gradient(90deg, rgba(217,169,63,.12), rgba(217,169,63,.03) 60%); }
+.dayline::before { content: ""; width: 7px; height: 7px; background: var(--brand); transform: rotate(45deg); flex: none; align-self: center; }
+.dayline b { font: 600 17px/1.5 var(--font-body); color: var(--gold-300); }
+.dayline em { font-style: normal; font-weight: 600; color: var(--gold-300); }
+.me-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: 26px; padding: 12px 16px; border-radius: 8px; border: 1px solid var(--line); background: rgba(14, 22, 40, .6); }
+.me-bar__lbl { font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); -webkit-text-stroke: .4px currentColor; }
+.me-bar input { flex: 0 1 230px; min-width: 0; padding: 10px 13px; border-radius: 4px; background: var(--obsidian-800); border: 1px solid var(--line-strong); color: var(--text-primary); font: 500 17px/1 var(--font-body); letter-spacing: .03em; }
+.me-bar p { flex: 1 1 280px; margin: 0; font: 400 16px/1.4 var(--font-body); letter-spacing: .02em; color: var(--text-muted); }
+.me-bar p b { color: var(--text-primary); font-weight: 600; }
+/* ?-knapp: förklaringen finns där för den som vill, i stället för att stå som text */
+.help { position: relative; flex: none; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line-strong); background: transparent; color: var(--text-muted); cursor: help; font: 600 13px/1 var(--font-body); }
+.help:hover, .help:focus-visible { color: var(--text-primary); border-color: var(--text-muted); }
+.help::after { content: attr(data-tip); position: absolute; z-index: 10; bottom: calc(100% + 10px); left: 50%; transform: translate(-50%, 4px); width: max-content; max-width: 260px; padding: 9px 12px; border-radius: 6px;
+  background: rgba(14, 22, 40, .97); border: 1px solid var(--line-strong); box-shadow: 0 12px 30px -8px rgba(0,0,0,.8); font: 400 13px/1.45 var(--font-body); color: var(--text-body); text-align: left; opacity: 0; pointer-events: none; transition: opacity .15s, transform .15s; }
+.help:hover::after, .help:focus-visible::after { opacity: 1; transform: translate(-50%, 0); }
+/* gruppsökets meme: – Mamma, kan vi köra X? – Vi har X hemma. X hemma: */
+.lede.meme { display: grid; gap: 2px; margin-top: 18px; font-style: italic; }
+/* ögat från Dungeon Finder (spelets animation, 80 rutor) i hörnet av gruppblocket, som knappen vid minimappen */
+.lfg-col { position: relative; }
+.lfg-col .party__head { padding-right: 52px; }   /* plats för ögat i hörnet */
+.lfg-eye { --e: 64px; position: absolute; z-index: 3; top: calc(var(--e) / -2.4); right: calc(var(--e) / -3.2); width: var(--e); height: var(--e); pointer-events: none;
+  background: url("ach/lfg-eye.webp") 0 0 / calc(var(--e) * 80) var(--e) no-repeat; filter: drop-shadow(0 4px 10px rgba(0,0,0,.7)) drop-shadow(0 0 14px rgba(217, 169, 63, .35));
+  animation: lfg-eye 4s steps(80) infinite; }
+@keyframes lfg-eye { to { background-position-x: calc(var(--e) * -80); } }
+@media (max-width: 900px) { .lfg-eye { right: 8px; } }
+/* meeting stone som bakgrund i vänsterspalten: stor, tonad, med runans blå sken som pulserar långsamt */
+.lfg-left { position: relative; isolation: isolate; }
+.stone { position: absolute; z-index: -1; right: -4%; top: -10px; height: clamp(340px, 38vw, 520px); opacity: .3; pointer-events: none;
+  filter: drop-shadow(0 0 30px rgba(90,170,255,.35)); animation: stone 4.5s ease-in-out infinite; }
+.stone img { display: block; height: 100%; width: auto; -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 96%); mask-image: linear-gradient(180deg, #000 55%, transparent 96%); }
+@keyframes stone { 50% { filter: drop-shadow(0 0 60px rgba(90,170,255,.7)); opacity: .38; } }
+/* samma sten vid "Bra att veta": står till vänster om frågorna, svagare så texten bär */
+#faq { overflow-x: clip; }
+.faq-col { position: relative; isolation: isolate; }
+.stone--quote { right: calc(100% - 90px); top: -150px; height: clamp(300px, 30vw, 440px); opacity: .22; }
+@media (max-width: 900px) { .stone--quote { right: auto; left: 50%; translate: -50% 0; opacity: .14; } }
+.lfg-col { display: grid; gap: 16px; align-content: start; }
+.lfg-col .party { margin-top: 0; }
+.lede.meme b { margin-top: 8px; font: 400 clamp(19px, 1.8vw, 23px)/1.2 var(--font-ui); font-style: normal; color: var(--gold-300); }
+
+/* ========== BEDRIFTER ========== */
+.toast { position: fixed; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 80px); z-index: 50; transform: translate(-50%, -16px); opacity: 0; pointer-events: none;
+  padding: 14px 22px; border-radius: 6px; background: rgba(14, 22, 40, .92); border: 1px solid rgba(217, 169, 63, .5); backdrop-filter: blur(10px); text-align: center; transition: .5s var(--ease);
+  box-shadow: 0 20px 50px -10px rgba(0, 0, 0, .8), 0 0 40px -10px rgba(217, 169, 63, .4); width: max-content; max-width: calc(100% - 32px); }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+.toast small { display: block; font: 600 12px/1.4 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); }
+.toast strong { font: 600 22px/1.2 var(--font-display); color: var(--text-primary); }
+
+/* ========== GRUPP / JÄMFÖR / NYA ========== */
+.split { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 72px); align-items: start; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+/* listan under gruppförslaget: samma fönster som i spelet, med panelen nedtonad */
+.lfg { display: grid; border: 1px solid #000; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(240,210,122,.22);
+  background: linear-gradient(180deg, rgba(12,9,8,.72), rgba(12,9,8,.86)), url("ach/lfg-panel.webp") center / cover; }
+.lfg__head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 16px 18px; background: rgba(0,0,0,.3); border-bottom: 1px solid rgba(0,0,0,.6); box-shadow: 0 1px 0 rgba(255,235,190,.05); }
+.lfg__head b { font: 600 20px/1.2 var(--font-display); color: var(--gold-300); text-shadow: 0 1px 2px #000; }
+.lfg__head span { font: 500 13px/1.4 var(--font-body); color: #b9ab94; }
+.lfg__row { display: grid; grid-template-columns: auto minmax(0, 1fr) auto auto; gap: 14px; align-items: center; padding: 11px 18px; border-top: 1px solid rgba(255,235,190,.06); }
+.lfg__row:nth-child(even) { background: rgba(255,235,190,.025); }
+.lfg__row .who { font: 600 17px/1.2 var(--font-ui); letter-spacing: .03em; color: var(--text-primary); min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lfg__row .who small { font: 500 13px/1 var(--font-body); color: var(--text-faint); margin-left: 6px; }
+.lfg__row .seen { font: 500 13px/1.4 var(--font-body); color: var(--text-faint); white-space: nowrap; }
+.lfg__empty { padding: 20px 18px; color: var(--text-muted); font-style: italic; margin: 0; }
+.cmp-ctl { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 28px; }
+.cmp-ctl input { flex: 0 1 200px; min-width: 0; padding: 11px 13px; border-radius: 4px; background: var(--obsidian-800); border: 1px solid var(--line-strong); color: var(--text-primary); font: 500 17px/1 var(--font-body); }
+.cmp-ctl span { font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-faint); }
+.cmp-read { display: grid; gap: 10px; margin-top: 26px; }
+.cmp-read div { padding-top: 10px; border-top: 1px solid var(--line); font: 500 17px/1.4 var(--font-body); letter-spacing: .02em; color: var(--text-muted); }
+.cmp-read b { color: var(--text-primary); font-weight: 600; }
+.chart-box { border: 1px solid rgba(0,0,0,.6); border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(244,237,228,.07);
+  background: linear-gradient(90deg, rgba(8,7,6,.88), rgba(8,7,6,.8)), url("ach/achievementbackground.webp") center bottom / 100% 200%; padding: 18px 10px 6px; overflow-x: auto; }
+.chart-box svg { display: block; width: 100%; min-width: 540px; height: auto; }
+.newbies { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); gap: 12px; margin-top: 14px; }
+/* nya medlemmar: de har kommit hem, så korten är guldpergament */
+.newbie { padding: 16px 18px; border-radius: 6px; border: 1px solid rgba(0,0,0,.7); display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 4px 14px; align-items: center; text-shadow: 0 1px 2px #000;
+  background: linear-gradient(90deg, rgba(16,10,3,.76), rgba(16,10,3,.6)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.newbie .pf { --s: 46px; }
+.newbie .pf { grid-row: 1 / 3; }
+.newbie button { grid-column: 1 / -1; }
+.newbie b { font: 600 20px/1.2 var(--font-ui); letter-spacing: .03em; text-shadow: 0 1px 2px #000, 0 0 10px rgba(0,0,0,.8); filter: brightness(1.2); }
+.newbie span { font: 500 13px/1.4 var(--font-body); color: #efe3c8; }
+.newbie button { justify-self: start; margin-top: 10px; text-shadow: none; }
+/* hur många vi är: en pergamentrad som nyckeltalen, med kurvan i guld */
+.growth { display: flex; align-items: center; gap: 18px 28px; flex-wrap: wrap; padding: 20px 26px; border: 1px solid rgba(0,0,0,.7); border-radius: 6px; text-shadow: 0 1px 2px #000;
+  background: linear-gradient(90deg, rgba(16,10,3,.78), rgba(16,10,3,.62)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.growth svg { margin-left: auto; }
+.growth__n { font: 500 clamp(56px, 7vw, 92px)/.9 var(--font-num); letter-spacing: -.04em; color: var(--text-primary); }
+.growth__l { font: 600 14px/1.6 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--gold-300); -webkit-text-stroke: .4px currentColor; }
+.growth__l small { display: block; font: 400 15px/1.4 var(--font-body); letter-spacing: 0; text-transform: none; color: #efe3c8; -webkit-text-stroke: 0; }
+.growth__l small b { color: var(--gold-300); font-weight: 600; }
+
+/* ========== FAQ / JOIN ========== */
+.faq { margin-top: 40px; border-top: 1px solid var(--line); }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; gap: 20px; padding: 24px 0; font: 600 clamp(19px, 2vw, 23px)/1.3 var(--font-display); color: var(--text-primary); letter-spacing: .02em; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font: 500 26px/1 var(--font-body); color: var(--brand); transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 24px; max-width: 64ch; }
+.faq .sr-box { margin: 0 0 28px; }
+.sizes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 0 0 28px; }
+.sizes div { padding: 18px; border: 1px solid var(--line); border-radius: 8px; background: var(--obsidian-900); }
+.sizes b { display: block; font: 600 54px/.9 var(--font-num); letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px var(--gold-300); }
+.sizes span { display: block; margin-top: 10px; font: 600 12px/1.2 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); }
+.sizes p { margin: 8px 0 0; font-size: 16px; line-height: 1.5; }
+@media (max-width: 640px) { .sizes { grid-template-columns: minmax(0, 1fr); } }
+/* jämförelsebladet på achievement-pergamentet: det är här man får veta vem som vann */
+.vs { display: grid; border: 1px solid rgba(0,0,0,.7); border-radius: 6px; overflow: hidden;
+  background: linear-gradient(90deg, rgba(16,10,3,.78), rgba(16,10,3,.62)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.vs__head, .vs__row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(90px, auto) minmax(0, 1fr); gap: 12px; align-items: center; padding: 12px 18px; border-top: 1px solid rgba(0,0,0,.35); box-shadow: inset 0 1px 0 rgba(255,235,190,.05); }
+.vs__head { padding: 18px; border-top: 0; box-shadow: none; background: rgba(0,0,0,.22); }
+.vs__head span { text-shadow: 0 1px 2px #000, 0 0 10px rgba(0,0,0,.8); filter: brightness(1.2); }
+.vs__head > div { display: flex; align-items: center; gap: 12px; min-width: 0; font: 600 20px/1.2 var(--font-ui); letter-spacing: .03em; }
+.vs__head > div:last-child { flex-direction: row-reverse; text-align: right; }
+.vs__head .pf { --s: 52px; }
+.vs__head span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.vs__row b { font: 500 20px/1 var(--font-num); color: #d9ccb2; text-shadow: 0 1px 2px #000; }
+.vs__row b:last-child { text-align: right; }
+.vs__row b.win { color: var(--gold-300); font-weight: 600; }
+.vs__row span { text-align: center; font: 600 12px/1.2 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: #b9ab94; text-shadow: 0 1px 2px #000; }
+.more-chip { position: absolute; z-index: 3; transform: translateX(-50%); font: 500 11px/1 var(--font-num); color: var(--text-primary); background: rgba(14,22,40,.9); border: 1px solid var(--line-strong); border-radius: 10px; padding: 3px 6px; pointer-events: none; white-space: nowrap; }
+.pf.img { background-image: url("avatars.webp"); background-size: calc(var(--s) * var(--avc)) auto; background-position: calc(var(--s) * var(--ax) * -1) calc(var(--s) * var(--ay) * -1); }
+.pf.img::before { display: none; }
+.gear i.img { background: url("icons.webp") calc(34px * var(--ix) * -1) calc(34px * var(--iy) * -1) / calc(34px * var(--icc)) auto; opacity: 1; }
+.seg { display: inline-flex; margin-top: 24px; padding: 4px; gap: 4px; border-radius: 6px; background: rgba(244,237,228,.05); border: 1px solid var(--line); flex-wrap: wrap; }
+.seg button { padding: 9px 14px; border: 0; border-radius: 4px; background: transparent; color: var(--text-muted); cursor: pointer; font: 600 14px/1 var(--font-label); letter-spacing: .14em; text-transform: uppercase; }
+.seg button[aria-pressed="true"] { background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); color: var(--gold-300); box-shadow: 0 0 0 1px var(--gold-400) inset; }
+.lede + .src { display: flex; }
+/* ========== REKRYTERINGSSIDAN (DEMO_LIVE) ========== */
+/* handritade pilar: en per sida, och de pekar på det man ska prova */
+.hero-cta { position: relative; display: inline-flex; }
+.hint-arrow { position: absolute; left: calc(100% + 6px); top: -34px; width: 86px; height: auto; pointer-events: none; transform: rotate(-8deg);
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.7)); animation: nudge 1.8s ease-in-out infinite; }
+@keyframes nudge { 50% { translate: -6px 3px; } }
+.player { position: sticky; }
+.play-hint { position: absolute; left: -4px; bottom: calc(100% + 2px); display: flex; align-items: flex-end; gap: 6px; pointer-events: none; }
+.play-hint img { width: 70px; height: auto; transform: rotate(-28deg) translateY(10px); filter: drop-shadow(0 2px 6px rgba(0,0,0,.8)); animation: nudge 1.8s ease-in-out infinite; }
+.play-hint span { padding-bottom: 34px; font: 400 18px/1.2 var(--font-ui); color: var(--gold-300); text-shadow: 0 1px 3px #000, 0 0 12px rgba(0,0,0,.9); white-space: nowrap; }
+/* overlayen: demons sektioner i ett lager ovanpå rekryteringssidan */
+.showcase__x { display: none; }
+.is-recruit .showcase { display: none; position: fixed; inset: 0; z-index: 60; overflow-y: auto; overscroll-behavior: contain; background: var(--bg); }
+.is-recruit.show-case { overflow: hidden; }
+.is-recruit.show-case .showcase { display: block; animation: rise-in .35s var(--ease); }
+@keyframes rise-in { from { opacity: 0; transform: translateY(18px); } }
+.is-recruit .showcase__x { display: inline-flex; position: fixed; top: 16px; right: 22px; z-index: 75; background: rgba(4,7,15,.85); backdrop-filter: blur(8px); }
+.is-recruit .showcase .player { top: 16px; }
+.is-recruit .hero__scroll { display: none; }
+.is-recruit:not(.show-case) .demo-badge { display: none; }
+.is-recruit .demo-badge { z-index: 70; }
+@media (max-width: 700px) { .hint-arrow { left: auto; right: 4px; top: -70px; width: 64px; transform: rotate(60deg); } .play-hint span { font-size: 15px; } }
+.stat-grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 16px; margin-top: 40px; }
+/* diagrammen på mörkt pergament med guldkurvor: samma värme som korten under */
+.stat-box { border: 1px solid rgba(0,0,0,.6); border-radius: 6px; box-shadow: inset 0 0 0 1px rgba(244,237,228,.07);
+  background: linear-gradient(90deg, rgba(8,7,6,.88), rgba(8,7,6,.8)), url("ach/achievementbackground.webp") center bottom / 100% 200%; padding: 20px 20px 16px; min-width: 0; }
+/* kortrubriker: Marcellus-versaler i guld, fetade med en tunn kontur (typsnittet har ingen fet vikt) */
+.stat-box h3 { margin: 0 0 12px; font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); -webkit-text-stroke: .4px currentColor; }
+.chart-scroll { overflow-x: auto; }
+.chart-scroll svg { display: block; width: 100%; min-width: 420px; height: auto; }
+.stat-read { margin: 10px 0 0; font: 500 17px/1.4 var(--font-body); letter-spacing: .02em; color: var(--text-muted); }
+.stat-read b { color: var(--gold-300); font-weight: 600; }
+.quirks { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); gap: 12px; margin-top: 16px; }
+/* Utmärkelserna är titlar man vinner: samma pergament som achievements. Guld när någon har titeln, mörkt tills den är avgjord. */
+.qk { position: relative; display: grid; gap: 10px; align-content: start; padding: 18px 18px 16px; border-radius: 6px; border: 1px solid rgba(0,0,0,.6); cursor: pointer; transition: transform .2s, box-shadow .2s; overflow: hidden;
+  background: linear-gradient(90deg, rgba(8,7,6,.84), rgba(8,7,6,.72)), url("ach/achievementbackground.webp") center bottom / 100% 200%; box-shadow: inset 0 0 0 1px rgba(244,237,228,.06); }
+.qk.done { background: linear-gradient(90deg, rgba(16,10,3,.76), rgba(16,10,3,.6)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.qk.done .qk__lbl, .qk.done .qk__who b, .qk.done .qk__val, .qk.done .qk__sub { text-shadow: 0 1px 2px #000; }
+.qk.done .qk__lbl { color: var(--gold-300); }
+.qk.done .qk__who b { text-shadow: 0 1px 2px #000, 0 0 10px rgba(0,0,0,.8); filter: brightness(1.25) saturate(1.1); }   /* bruna/mörka klassfärger ska synas mot pergamentet */
+.qk.done .qk__sub { color: #efe3c8; }
+.qk:not(.done) .qk__lbl { color: var(--text-muted); }
+.qk:hover { transform: translateY(-2px); }
+.qk--guild { cursor: default; }
+.qk--guild:hover { transform: none; }
+.qk__lbl { font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); -webkit-text-stroke: .4px currentColor; }
+.qk__who { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.qk__who .pf { --s: 38px; }
+.qk__who b { font: 600 20px/1.1 var(--font-ui); letter-spacing: .03em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.qk__sig { width: 38px; height: 38px; color: var(--gold-300); flex: none; }
+.qk__val { font: 500 clamp(30px, 3vw, 40px)/1 var(--font-num); letter-spacing: -.03em; color: var(--text-primary); }
+.qk__sub { font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+@media (max-width: 900px) { .stat-grid { grid-template-columns: minmax(0, 1fr); } }
+.dung-f { margin-top: 26px; }
+.dung-f + .chips { margin-top: 14px; }
+.new-tag { display: inline-block; margin-right: 6px; padding: 2px 5px 1px; border-radius: 3px; font: 600 12px/1.2 var(--font-label); font-style: normal; letter-spacing: .12em; text-transform: uppercase; color: var(--obsidian-950); background: linear-gradient(180deg, var(--gold-300), var(--gold-400)); vertical-align: 1px; }
+.btn.is-new { border-color: rgba(217, 169, 63, .4); }   /* nya dungeons i guld: temats färg för det som sticker ut */
+.btn.is-new[aria-pressed="true"] .new-tag { background: var(--obsidian-900); color: var(--gold-300); }
+.party__head { flex-wrap: wrap; }
+.new-line { flex-basis: 100%; font: 500 13px/1.4 var(--font-body); font-style: normal; letter-spacing: .02em; color: var(--text-muted); }
+.chip-n { font: 500 11px/1 var(--font-num); opacity: .7; margin-left: 4px; letter-spacing: 0; }
+/* Gruppförslaget som spelets Group Finder-fönster: panelen med äventyrarna på klippan, trärubrik, guldkant */
+.party { margin-top: 26px; border: 1px solid #000; border-radius: 6px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 18px 40px -22px rgba(0,0,0,.9);
+  background: linear-gradient(180deg, rgba(12,9,8,.25), rgba(12,9,8,.6)), url("ach/lfg-panel.webp") center 30% / cover; }
+.party__head { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,.6); background: rgba(0,0,0,.42); box-shadow: 0 1px 0 rgba(255,235,190,.05); }
+.party__head b { font: 600 18px/1.2 var(--font-display); color: var(--gold-300); text-shadow: 0 1px 2px #000; }
+.party__head span { font: 500 13px/1.4 var(--font-body); color: #b9ab94; }
+.party__slot { display: grid; grid-template-columns: 26px auto minmax(0, 1fr) auto; gap: 12px; align-items: center; padding: 9px 16px; border-bottom: 1px solid rgba(0,0,0,.45); background: rgba(10,8,7,.35); text-shadow: 0 1px 2px #000; }
+.party__slot .pf { --s: 34px; }
+.party__slot .who { font: 600 17px/1.2 var(--font-ui); letter-spacing: .03em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; cursor: pointer; }
+.party__slot .who small { display: block; font: 500 13px/1.4 var(--font-body); color: #b9ab94; }
+.party__slot .seen { font: 500 13px/1.4 var(--font-body); color: #b9ab94; }
+.party__slot--empty { grid-template-columns: 26px minmax(0, 1fr); }
+.party__slot--empty .who { color: var(--text-muted); cursor: default; }
+.party__foot { display: flex; gap: 8px; justify-content: flex-end; padding: 12px 16px; background: rgba(10,8,7,.5); }
+.party__foot .btn[disabled] { opacity: .4; pointer-events: none; }
+.party__miss { margin: 0; padding: 0 16px 14px; font: 500 13px/1.4 var(--font-body); color: #ffb4a3; }
+/* spelets rollikoner (26 px, tank · healer · dps i en remsa) */
+.role { display: inline-block; width: 26px; height: 26px; flex: none; background: url("ach/lfg-roles.webp") 0 0 / 78px 26px no-repeat; filter: drop-shadow(0 1px 2px rgba(0,0,0,.7)); }
+.role svg { display: none; }
+.role--healer { background-position: -26px 0; }
+.role--dps { background-position: -52px 0; }
+.lfg__row { grid-template-columns: 26px auto minmax(0, 1fr) auto auto; }
+.rolef { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.rolef button { display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 14px; border: 1px solid var(--line-strong); background: transparent; color: var(--text-muted); cursor: pointer; font: 600 12px/1 var(--font-label); letter-spacing: .12em; text-transform: uppercase; }
+.rolef button svg { width: 12px; height: 12px; }
+.rolef button small { font: 500 11px/1 var(--font-num); letter-spacing: 0; opacity: .7; }
+.rolef button[aria-pressed="true"] { background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); color: var(--gold-300); border-color: transparent; box-shadow: 0 0 0 1px var(--gold-400) inset; }
+/* ---------- zonmålningar på tavlan ---------- */
+.zseg::before { background: var(--art) center / cover; filter: blur(6px) saturate(1.25) brightness(.75); opacity: .55; transform: scale(1.15); -webkit-mask-image: none; mask-image: none; }
+.zseg::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(4,7,15,.55), rgba(4,7,15,.1) 35%, rgba(4,7,15,.55)); }
+.zseg.fog::before { opacity: .12; filter: blur(6px) grayscale(1) brightness(.6); }
+.zseg span { z-index: 1; display: grid; justify-items: center; gap: 6px; color: var(--text-primary); text-shadow: 0 1px 4px #000; }
+.zseg span small { font: 500 11px/1 var(--font-num); letter-spacing: 0; color: var(--text-muted); }
+.zbadge { display: block; width: clamp(18px, 2.4vw, 30px); aspect-ratio: 1; border-radius: 4px; background-size: cover; box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 0 0 2px rgba(240,210,122,.55); }
+.zseg.fog .zbadge { filter: grayscale(1) brightness(.5); box-shadow: 0 0 0 1px rgba(0,0,0,.8), 0 0 0 2px rgba(244,237,228,.15); }
+/* ---------- kronor ---------- */
+.tok.pf { overflow: visible; }
+.tok.cr1::after, .tok.cr2::after, .tok.cr3::after { content: ""; position: absolute; left: 50%; top: -48%; width: 70%; height: 52%; transform: translateX(-50%); background: var(--crown) center / contain no-repeat; filter: drop-shadow(0 1px 1px #000); pointer-events: none; }
+.tok.cr1 { --crown: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M2 15h20v3H2zM1 4l5.5 5L12 0l5.5 9L23 4l-2 10H3z' fill='%23f0d27a'/%3E%3C/svg%3E"); z-index: 3; }
+.tok.cr2 { --crown: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M2 15h20v3H2zM1 4l5.5 5L12 0l5.5 9L23 4l-2 10H3z' fill='%23d9dde3'/%3E%3C/svg%3E"); }
+.tok.cr3 { --crown: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 18'%3E%3Cpath d='M2 15h20v3H2zM1 4l5.5 5L12 0l5.5 9L23 4l-2 10H3z' fill='%23cd8a4e'/%3E%3C/svg%3E"); }
+/* rubrik på egen rad, beskrivningen under: som sektionerna men ett steg mindre */
+.crowns-head { display: grid; gap: 8px; margin-top: 40px; }
+.crowns-head h3 { display: flex; align-items: center; gap: 10px; margin: 0; font: 600 16px/1.2 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); -webkit-text-stroke: .45px currentColor; }
+.crowns-head h3[title] { cursor: help; }
+.crowns-head .count { font: 600 12px/1 var(--font-num); letter-spacing: 0; color: var(--text-muted); -webkit-text-stroke: 0; padding: 4px 8px; border: 1px solid var(--line-strong); border-radius: 10px; }
+.crowns-head p { margin: 0; max-width: 72ch; font: 400 15px/1.5 var(--font-body); color: var(--text-faint); }
+.crown-card__empty { display: flex; align-items: center; gap: 12px; padding: 4px 0; font: 400 14px/1.3 var(--font-body); color: var(--text-faint); }
+.crown-row { display: flex; gap: 3px; opacity: .3; flex: none; }
+.crown-card ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.crown-card li { display: grid; grid-template-columns: 22px auto minmax(0, 1fr); gap: 8px; align-items: center; cursor: pointer; }
+.crown-card li.open { grid-template-columns: 22px minmax(0, 1fr); cursor: default; }
+.crown-card .crown { width: 22px; height: 17px; filter: drop-shadow(0 1px 2px rgba(0,0,0,.8)); }
+.crown-card .pf { --s: 28px; }
+.crown-card .who { font: 600 15px/1.15 var(--font-ui); letter-spacing: .02em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+/* mörka klassfärger (shaman, warrior) ska synas mot pergamentet */
+.ach.crown-card li:not(.open) .who, .five__slot b { text-shadow: 0 1px 2px #000, 0 0 10px rgba(0,0,0,.8); filter: brightness(1.45) saturate(.9); }
+.ach.crown-card .who small { filter: brightness(.7); }
+.crown-card .who small { display: block; font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+.crown-card li.open .who { font: 400 14px/1.3 var(--font-body); color: var(--text-faint); }
+.crown-card li.open .crown { opacity: .3; }
+/* ---------- ticker ---------- */
+.ticker__row { gap: 22px; }
+.ticker__row .dot { color: var(--gold-500); font-size: 9px; }
+.ticker__row .arr { color: var(--text-faint); font-size: 11px; }
+.ticker__row i { font-style: normal; color: var(--text-faint); font-size: 12px; }
+/* ---------- achievements i spelets stil ---------- */
+.ach-sum { margin: 22px 0 0; font: 500 17px/1.3 var(--font-body); letter-spacing: .03em; color: var(--text-muted); }
+.ach-sum b { font: 500 26px/1 var(--font-num); color: var(--gold-300); margin-right: 4px; }
+.achs { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 460px), 1fr)); gap: 10px; margin-top: 26px; }
+.ach-cat { grid-column: 1 / -1; margin: 22px 0 2px; font: 600 14px/1 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--brand); }
+.ach-cat:first-child { margin-top: 0; }
+.ach { display: grid; grid-template-columns: 72px minmax(0, 1fr) 58px; gap: 16px; align-items: center; padding: 12px 14px; border-radius: 6px; border: 1px solid rgba(0,0,0,.6);
+  background: linear-gradient(90deg, rgba(8,7,6,.82), rgba(8,7,6,.7)), url("ach/achievementbackground.webp") center bottom / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(244,237,228,.06); }
+.ach.done { background: linear-gradient(90deg, rgba(20,13,4,.55), rgba(20,13,4,.35)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  border-color: rgba(0,0,0,.7); box-shadow: inset 0 0 0 1px rgba(240,210,122,.45), 0 0 24px -12px rgba(240,210,122,.6); }
+.ach__ico { --f: 72px; position: relative; width: var(--f); height: var(--f); display: grid; place-items: center; }
+.ach__ico::after { content: ""; position: absolute; inset: 0; background: url("ach/iconframe.webp") 0 0 / calc(var(--f) * 128 / 72) auto no-repeat; pointer-events: none; }
+.ai { --i: 52px; display: block; width: var(--i); height: var(--i); border-radius: 3px; background: url("ach/icons.webp") calc(var(--i) * var(--ax) * -1) calc(var(--i) * var(--ay) * -1) / calc(var(--i) * 8) auto; }
+.ai--img { background-size: cover; background-position: center; }
+.ach:not(.done) .ai { filter: grayscale(1) brightness(.55); }
+.ach.done .ach__ico::before { content: ""; position: absolute; inset: -20%; background: url("ach/bling.webp") center / contain no-repeat; opacity: .5; }
+.ach__body { min-width: 0; display: grid; gap: 4px; }
+.ach h4 { margin: 0; font: 600 19px/1.2 var(--font-display); letter-spacing: .02em; color: var(--text-muted); }
+.ach.done h4 { color: var(--gold-300); text-shadow: 0 1px 2px #000; }
+.ach p { margin: 0; font-size: 15px; line-height: 1.4; color: var(--text-muted); }
+.ach.done p { color: #efe3c8; text-shadow: 0 1px 2px #000; }
+.ach__who { display: flex; flex-wrap: wrap; gap: 4px 12px; }
+.ach__who:empty { display: none; }
+.ach__p { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; font: 600 13px/1 var(--font-ui); letter-spacing: .02em; }
+.ach__p .pf { --s: 22px; }
+.ach__p b { font-weight: inherit; }   /* annars blir <b> i en 600-rad "bolder" = 900 */
+.ach__bar { position: relative; height: 14px; margin-top: 4px; border-radius: 2px; background: rgba(0,0,0,.55); box-shadow: inset 0 0 0 1px rgba(244,237,228,.12); overflow: hidden; }
+.ach__bar i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(180deg, #3fae3f, #1c6b1c); transition: width .45s var(--ease); }
+.ach__bar span { position: relative; display: block; text-align: center; font: 500 11px/14px var(--font-num); color: #fff; text-shadow: 0 1px 1px #000; }
+.ach__pts, .ach.done .ach__pts { display: grid; justify-items: center; gap: 6px; padding: 0; border: 0; background: none; white-space: normal; }
+.ach__pts b { width: 58px; height: 58px; display: grid; place-items: center; padding-bottom: 8px; font: 600 16px/1 var(--font-num); color: #9a958c; text-shadow: 0 1px 2px #000;
+  background: url("ach/shields.webp") 100% 0 / 200% 200% no-repeat; }
+.ach.done .ach__pts b { color: #fff; background-position: 0 0; }
+.ach__pts small { font: 500 11px/1.25 var(--font-body); letter-spacing: .02em; color: var(--gold-300); text-align: center; }
+/* toast i spelets stil */
+.toast { display: grid; grid-template-columns: 56px minmax(0, 1fr) auto; gap: 14px; align-items: center; text-align: left; width: min(420px, calc(100% - 32px)); padding: 16px 26px 16px 20px;
+  background: url("ach/alert-background-mini.webp") center / 100% 100%; border: 0; border-radius: 6px; }
+.toast__ico .ai { --i: 48px; box-shadow: 0 0 0 2px rgba(0,0,0,.7), 0 0 0 3px rgba(240,210,122,.6); }
+.toast small { color: #f0d27a; text-shadow: 0 1px 2px #000; }
+.toast strong { color: #fff; text-shadow: 0 1px 3px #000; }
+.toast__pts { font: 600 15px/1 var(--font-num); color: #fff; text-shadow: 0 1px 2px #000; width: 50px; height: 50px; padding-bottom: 7px; display: grid; place-items: center; background: url("ach/shields.webp") 0 0 / 200% 200% no-repeat; }
+@media (max-width: 520px) { .ach { grid-template-columns: 58px minmax(0, 1fr) 46px; gap: 12px; } .ach__ico { --f: 58px; } .ach__ico .ai { --i: 42px; } }
+/* Loppet till toppen: samma kort som achievements, med föremålskvaliteten (--q) som ram och glöd i stället för guld */
+.crowns { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 10px; margin-top: 30px; }
+.ach.crown-card { grid-template-columns: 72px minmax(0, 1fr); align-items: start; box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--q) 35%, transparent); }
+.ach.crown-card.done { box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--q) 75%, transparent), 0 0 26px -10px var(--q); }
+.ach.crown-card .ach__body { gap: 8px; }
+.ach.crown-card .who small, .ach.crown-card li.open .who, .ach.crown-card .crown-card__empty { color: #b9ab94; }
+.ach.crown-card.done .who small { color: #efe3c8; }
+.five { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+/* Förstafemman på pergament: mörkt så länge platsen är ledig, guld när någon tagit den */
+.five__slot { position: relative; display: grid; justify-items: center; text-align: center; gap: 8px; padding: 24px 10px 16px; border-radius: 6px; border: 1px solid rgba(0,0,0,.6); cursor: pointer; min-width: 0; text-shadow: 0 1px 2px #000;
+  background: linear-gradient(90deg, rgba(8,7,6,.84), rgba(8,7,6,.72)), url("ach/achievementbackground.webp") center bottom / 100% 200%; box-shadow: inset 0 0 0 1px rgba(244,237,228,.06); }
+.five__slot:not([data-n]) { cursor: default; }
+.five__slot:not(.five__slot--in) .pf { filter: grayscale(.55) brightness(.75); }
+.five__slot:not(.five__slot--in) b { filter: saturate(.5) brightness(.85); }
+.five__slot--in { background: linear-gradient(90deg, rgba(16,10,3,.72), rgba(16,10,3,.55)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.45), 0 0 24px -12px rgba(240,210,122,.6); }
+.five__slot .pf { --s: clamp(48px, 6vw, 72px); }
+.five__slot--in .pf { box-shadow: 0 0 0 2px var(--c), 0 0 0 4px var(--bg), 0 0 0 5px var(--gold-300), 0 0 30px -6px var(--gold-300); }
+.five__slot b { font: 600 17px/1.1 var(--font-ui); letter-spacing: .03em; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.five__slot small { font: 500 13px/1.4 var(--font-body); color: #b9ab94; }
+.five__slot--in small { color: #efe3c8; }
+.five__n { position: absolute; top: 8px; left: 11px; font: 700 17px/1 var(--font-display); color: #8a7f6e; }
+.five__slot--in .five__n { color: var(--gold-300); }
+@media (max-width: 700px) { .five { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.join { text-align: center; position: relative; overflow: hidden; isolation: isolate; }
+/* Elden vi inte ser: ett varmt sken från underkanten som fladdrar, och gnistor (canvas) som stiger ur det */
+.join { padding-bottom: clamp(110px, 14vw, 180px); }
+.join::before { content: ""; position: absolute; inset: 0; z-index: -2; pointer-events: none;
+  background: radial-gradient(ellipse 38% 50% at 50% 104%, rgba(255, 150, 50, .32), rgba(220, 80, 20, .14) 45%, transparent 75%),
+              radial-gradient(ellipse 70% 35% at 50% 100%, rgba(180, 60, 20, .16), transparent 70%);
+  transform-origin: 50% 100%; animation: firelight 2.6s ease-in-out infinite; }
+.join::after { content: ""; position: absolute; left: 50%; bottom: -40px; width: min(420px, 60%); height: 120px; transform: translateX(-50%); z-index: -2; pointer-events: none;
+  background: radial-gradient(ellipse 50% 50% at 50% 60%, rgba(255, 210, 120, .35), rgba(255, 120, 40, .12) 50%, transparent 72%); filter: blur(8px);
+  animation: firelight 1.3s ease-in-out infinite reverse; }
+@keyframes firelight { 0%, 100% { opacity: .85; transform: translateX(var(--tx, 0)) scale(1); } 30% { opacity: 1; } 55% { opacity: .75; transform: translateX(var(--tx, 0)) scale(1.04, .97); } 80% { opacity: .95; } }
+.join::after { --tx: -50%; }
+.join canvas { position: absolute; inset: 0; z-index: -1; width: 100%; height: 100%; pointer-events: none; }
+.join .eyebrow { justify-content: center; }
+.join .d1, .join .lede { margin-inline: auto; }
+.join__btns { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 36px; }
+.resan-more .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 26px; }
+.resan-more .lede { margin-top: 18px; }
+footer { padding: 40px 16px 90px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font: 500 13px/1.6 var(--font-body); letter-spacing: .02em; color: var(--text-faint); max-width: 1200px; margin-inline: auto; }
+
+.pf { --s: 40px; --c: #fff; position: relative; flex: none; display: inline-block; width: var(--s); height: var(--s); border-radius: 50%; overflow: hidden; cursor: pointer; vertical-align: middle;
+  background: radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--c) 34%, #1c2540), #060a14 78%); box-shadow: 0 0 0 2px var(--c), 0 0 0 3.5px var(--bg);
+  transition: left .45s var(--ease), bottom .45s var(--ease), opacity .4s, transform .2s, box-shadow .2s; }
+.pf::before { content: ""; position: absolute; inset: 20% 10% -6%; background: color-mix(in srgb, var(--c) 30%, #d9d0c4); opacity: .75;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='14' r='8.5'/%3E%3Cpath d='M3 42c0-11 8-17 17-17s17 6 17 17z'/%3E%3C/svg%3E") center bottom / contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='14' r='8.5'/%3E%3Cpath d='M3 42c0-11 8-17 17-17s17 6 17 17z'/%3E%3C/svg%3E") center bottom / contain no-repeat; }
+.pf img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pf.tok { position: absolute; }   /* tavlans porträtt placeras med left/bottom, inte i flödet */
+
+/* ========== TOPPLISTOR ========== */
+.lb-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 30px; }
+.lb-cls { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.lb-cls button { width: 30px; height: 30px; border-radius: 50%; border: 2px solid transparent; cursor: pointer; background: var(--c); opacity: .45; transition: opacity .2s, transform .2s; }
+.lb-cls button[aria-pressed="true"] { opacity: 1; border-color: var(--gold-300); transform: scale(1.08); }
+.lb-cls button.all { width: auto; padding: 0 12px; border-radius: 15px; background: rgba(255,255,255,.06); border-color: var(--line-strong); opacity: 1; font: 600 12px/1 var(--font-label); letter-spacing: .16em; text-transform: uppercase; color: var(--text-muted); }
+.lb-cls button.all[aria-pressed="true"] { background: linear-gradient(180deg, var(--navy-500), var(--navy-600)); color: var(--gold-300); border-color: transparent; box-shadow: 0 0 0 1px var(--gold-400) inset; transform: none; }
+.lb { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(20px, 3vw, 40px); margin-top: 34px; align-items: stretch; }
+/* vänsterspalten: rubriken för vald lista överst, pallen längst ner på sin scen */
+.lb-left { display: flex; flex-direction: column; justify-content: space-between; gap: 36px; min-width: 0; }
+.lb-title { display: flex; align-items: center; gap: 16px; }
+.lb-title h3 { margin: 0; font: 400 clamp(24px, 2.6vw, 32px)/1.1 var(--font-ui); color: var(--text-primary); }
+.lb-title p { margin: 5px 0 0; font: 400 15px/1.4 var(--font-body); color: var(--text-muted); }
+.lb-title p b { color: var(--gold-300); font-weight: 600; }
+.lb-list { align-self: end; }
+.podium { position: relative; isolation: isolate; margin-top: 18px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; align-items: end; }
+/* scenen: ett blått ljus på golvet under lådorna */
+.podium::before { content: ""; position: absolute; z-index: -1; left: -8%; right: -8%; bottom: 70px; height: 108px; pointer-events: none;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(91,143,240,.3), transparent 72%); }
+/* Pallen: varje plats i sin föremålskvalitet (--q), som ett föremål i spelet: färgad ram, glöd och ett ljus som faller ner på stenen */
+.pod { --q: #0070dd; position: relative; display: grid; justify-items: center; text-align: center; gap: 8px; cursor: pointer; min-width: 0; isolation: isolate; }
+.pod::before { content: ""; position: absolute; z-index: -1; left: -30%; right: -30%; top: -6%; bottom: 100px; pointer-events: none;
+  background: radial-gradient(ellipse closest-side at 50% 50%, color-mix(in srgb, var(--q) 24%, transparent), color-mix(in srgb, var(--q) 9%, transparent) 55%, transparent 100%); }
+.pod .pf { --s: clamp(64px, 8vw, 96px); transition: transform .3s var(--ease);
+  box-shadow: 0 0 0 2px var(--q), 0 0 0 4px var(--bg), 0 0 0 5px color-mix(in srgb, var(--q) 45%, transparent), 0 0 32px -6px var(--q); }
+.pod:hover .pf { transform: translateY(-4px); }
+.pod--1 .pf { --s: clamp(80px, 10vw, 124px); box-shadow: 0 0 0 3px var(--q), 0 0 0 5px var(--bg), 0 0 0 6px color-mix(in srgb, var(--q) 60%, #fff), 0 0 50px -4px var(--q); }
+/* helfiguren står på lådor (Explorers' League): ettan på två staplade, tvåan på en, trean på en mindre */
+.pod__stand { position: relative; z-index: 3; display: grid; justify-items: center; margin-bottom: -22px; }
+.pod__fig { display: block; height: clamp(195px, 22vw, 280px); width: auto; max-width: 150%; transition: transform .3s var(--ease);
+  filter: drop-shadow(0 6px 6px rgba(0,0,0,.7)) drop-shadow(0 0 20px color-mix(in srgb, var(--q) 45%, transparent)); }
+.pod--1 .pod__fig { height: clamp(235px, 26.5vw, 345px); }
+.pod--1 { z-index: 2; }
+.pod.has-fig { gap: 0; }
+.pod:not(.has-fig) .pod__stand { margin-bottom: -6px; }
+.pod:hover .pod__fig { transform: translateY(-5px); }
+/* Alliance-bannern som tonad fond bakom ettan och lådorna: står från golvet och upp, tar ingen egen höjd */
+.pod--1::after { content: ""; position: absolute; z-index: -2; left: 50%; bottom: 118px; height: calc(100% - 96px); aspect-ratio: 227 / 588; transform: translateX(-50%); pointer-events: none;
+  background: url("ach/banner.webp") center bottom / contain no-repeat; opacity: .38;
+  -webkit-mask-image: linear-gradient(180deg, #000 45%, transparent 92%); mask-image: linear-gradient(180deg, #000 45%, transparent 92%); }
+/* kontaktskugga på locket under fötterna */
+.pod__stand::after { content: ""; position: absolute; z-index: -1; left: 50%; bottom: 6px; width: 64%; height: 22px; transform: translateX(-50%); pointer-events: none;
+  background: radial-gradient(ellipse 50% 50% at 50% 50%, rgba(0,0,0,.75), rgba(0,0,0,.35) 50%, transparent 72%); }
+.pod--1 .pod__stand::after { height: 26px; }
+.crates { display: grid; justify-items: center; width: 100%; }
+.crates i { position: relative; display: block; width: min(92%, 136px); aspect-ratio: 244 / 250; background: url("ach/crate.webp") center / contain no-repeat; filter: drop-shadow(0 8px 10px rgba(0,0,0,.6)); }
+.crates i + i { margin-top: -17%; }          /* den övre lådan står på den undres lock */
+.crates i:first-child { z-index: 2; }
+.pod--3 .crates i { width: min(74%, 108px); }
+.pod__info { display: grid; justify-items: center; align-content: start; gap: 2px; width: 100%; height: 124px; padding-top: 10px; }
+.pod__info span { font: 700 clamp(24px, 2.6vw, 32px)/1 var(--font-display); color: color-mix(in srgb, var(--q) 70%, #fff); text-shadow: 0 0 16px var(--q); }
+.pod--1 .pod__info span { font-size: clamp(34px, 3.8vw, 48px); }
+.pod--3 .pod__info span { font-size: clamp(19px, 2vw, 25px); }
+.pod__info { align-content: end; }   /* siffrorna är olika stora: namnen ska ändå stå på samma rad */
+.pod__info b { font: 400 clamp(15px, 1.5vw, 19px)/1.4 var(--font-ui); min-height: 1.4em; max-width: 100%; padding-inline: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pod__info .v { font: 600 clamp(15px, 1.6vw, 19px)/1 var(--font-num); font-style: normal; color: var(--text-primary); }
+/* highscore-listan på achievement-pergamentet, som jämförelsebladet: ställningen är ett resultat */
+.lb-list { display: grid; border: 1px solid rgba(0,0,0,.7); border-radius: 6px; overflow: hidden;
+  background: linear-gradient(90deg, rgba(16,10,3,.78), rgba(16,10,3,.62)), url("ach/achievementbackground.webp") center top / 100% 200%;
+  box-shadow: inset 0 0 0 1px rgba(240,210,122,.4), 0 0 24px -14px rgba(240,210,122,.6); }
+.lb-row { display: grid; grid-template-columns: 28px auto minmax(0, 1fr) minmax(40px, 120px) auto; gap: 12px; align-items: center; padding: 9px 16px; cursor: pointer; border-top: 1px solid rgba(0,0,0,.35); box-shadow: inset 0 1px 0 rgba(255,235,190,.05); text-shadow: 0 1px 2px #000; }
+.lb-row:first-child { border-top: 0; box-shadow: none; }
+.lb-row:hover { background: rgba(255,235,190,.07); }
+.lb-row.me { background: rgba(240, 210, 122, .16); box-shadow: inset 0 0 0 1px rgba(240, 210, 122, .7); }
+.lb-row.me .n { color: var(--gold-300); }
+.lb-row .n { font: 500 13px/1 var(--font-num); color: #b9ab94; }
+.lb-row .pf { --s: 32px; }
+.lb-row .who { font: 600 17px/1.2 var(--font-ui); letter-spacing: .03em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px 2px #000, 0 0 10px rgba(0,0,0,.8); filter: brightness(1.2); }
+.lb-row .who small { display: block; font: 500 13px/1.4 var(--font-body); color: #cdbf9f; }
+.lb-row .bar { height: 5px; border-radius: 2px; background: rgba(0,0,0,.45); box-shadow: inset 0 0 0 1px rgba(255,235,190,.08); overflow: hidden; }
+.lb-row .bar i { display: block; height: 100%; background: var(--c); }
+.lb-row .v { font: 600 16px/1 var(--font-num); color: var(--gold-300); text-align: right; min-width: 56px; }
+
+/* ========== ARMORY ========== */
+dialog.armory { width: min(820px, calc(100% - 24px)); max-height: min(900px, calc(100% - 24px)); padding: 0; border: 1px solid var(--line-strong); border-radius: 12px; background: var(--obsidian-900); color: var(--text-body); overflow: auto;
+  box-shadow: 0 40px 100px -20px rgba(0,0,0,.9); }
+dialog.armory::backdrop { background: rgba(2, 4, 10, .72); backdrop-filter: blur(6px); }
+.arm-head { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 22px; align-items: center; padding: 30px 28px 26px; overflow: hidden; isolation: isolate; border-bottom: 1px solid var(--line); }
+.arm-head::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--art) center / cover; opacity: .22; -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%); mask-image: linear-gradient(90deg, transparent, #000 40%); }
+.arm-head::after { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(circle at 12% 50%, color-mix(in srgb, var(--c) 22%, transparent), transparent 55%); }
+.arm-head .pf { --s: clamp(84px, 14vw, 120px); box-shadow: 0 0 0 3px var(--c), 0 0 0 6px var(--obsidian-900), 0 0 50px -10px var(--c); }
+.arm-head h3 { margin: 0; font: 600 clamp(32px, 5vw, 48px)/1 var(--font-display); letter-spacing: .03em; overflow-wrap: anywhere; }
+.arm-head p { margin: 8px 0 0; font: 600 17px/1.3 var(--font-ui); letter-spacing: .06em; color: var(--text-muted); }
+.arm-head p span { color: var(--good); }
+.arm-x { position: absolute; top: 14px; right: 14px; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line-strong); background: rgba(4,7,15,.6); cursor: pointer; font-size: 18px; color: var(--text-primary); }
+.arm-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 1px; background: var(--line); border-bottom: 1px solid var(--line); }
+.arm-stats div { background: var(--obsidian-900); padding: 16px 18px; min-width: 0; }
+.arm-stats b { display: block; font: 500 clamp(22px, 2.6vw, 30px)/1 var(--font-num); color: var(--text-primary); letter-spacing: -.02em; }
+.arm-stats span { display: block; margin-top: 6px; font: 600 12px/1.3 var(--font-label); letter-spacing: var(--cap); text-transform: uppercase; color: var(--text-faint); }
+.arm-body { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0 26px; padding: 22px 28px 10px; }
+.gear { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 2px 12px; align-items: center; padding: 7px 0; border-bottom: 1px solid var(--line); }
+.gear i { grid-row: 1 / 3; width: 34px; height: 34px; border-radius: 5px; background: radial-gradient(circle at 35% 30%, color-mix(in srgb, var(--q) 55%, #fff), color-mix(in srgb, var(--q) 45%, #000) 70%); box-shadow: 0 0 0 1px var(--q); opacity: .9; }
+.gear b { font: 600 15px/1.2 var(--font-ui); letter-spacing: .02em; color: var(--q); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.gear small { font: 500 13px/1.4 var(--font-body); color: var(--text-faint); }
+.arm-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 28px 22px; }
+.arm-foot .src { margin: 0; }
+@media (max-width: 700px) {
+  .arm-stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .arm-body { grid-template-columns: minmax(0, 1fr); }
+  .lb { grid-template-columns: minmax(0, 1fr); }
+  .lb-row { grid-template-columns: 24px auto minmax(0, 1fr) auto; }
+  .lb-row .bar { display: none; }
+}
+.tip { position: fixed; z-index: 60; pointer-events: none; max-width: 260px; padding: 10px 13px; border-radius: 6px; background: rgba(14, 22, 40, .96); border: 1px solid var(--line-strong);
+  box-shadow: 0 16px 34px -8px rgba(0, 0, 0, .8); font: 500 15px/1.4 var(--font-body); letter-spacing: .02em; color: var(--text-body); }
+.tip b { display: block; font: 600 17px/1.2 var(--font-ui); }
+.tip span { color: var(--text-faint); font: 500 13px/1.4 var(--font-body); }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+  .kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .player { grid-template-columns: auto minmax(0, 1fr); }
+  .player input { grid-column: 1 / -1; }
+  .topbar nav { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="sigil" viewBox="0 0 64 64">
+    <!-- elden: yttre låga med den inre som hål, i en ring -->
+    <circle cx="32" cy="32" r="29.5" fill="none" stroke="currentColor" stroke-width="2.6"/>
+    <g transform="translate(32 33) scale(.8) translate(-32 -28)">
+      <path fill="currentColor" fill-rule="evenodd" d="M32 4C36 15 47 21 47 35C47 45 40 52 32 52S17 45 17 35C17 28 21 23 25 19C25 26 27 29 30 30C29 21 30 12 32 4Z
+        M32 29C35 34 39 37 39 43C39 47 36 50 32 50S25 47 25 43C25 39 28 36 29.5 33C30 36 31 37 32.5 37.5C31.5 34.5 31.3 32 32 29Z"/>
+    </g>
+  </symbol>
+</svg>
+
+<header class="topbar" id="topbar">
+  <a class="topbar__brand" href="#top"><svg><use href="#sigil"/></svg>HEMMET</a>
+  <nav aria-label="Sektioner"><a href="#resan">Resan</a><a href="#bedrifter">Achievements</a><a href="#statistik">Statistik</a><a href="#topp">Topplistor</a><a href="#grupp">Grupp</a><a href="#jamfor">Jämför</a><a href="#faq">Om oss</a></nav>
+</header>
+
+<main id="top">
+  <section class="hero" id="hero">
+    <div class="hero__art"></div><div class="hero__glow"></div><canvas id="embers"></canvas>
+    <svg class="hero__sigil"><use href="#sigil"/></svg>
+    <p class="hero__meta">EU · <b>WoW Forever</b> · 5 nov</p>
+    <h1 id="title">HEMMET</h1>
+    <p class="hero__slogan">Välkommen hem.</p>
+    <div class="hero__count" id="count" aria-label="Tid kvar till release"></div>
+    <p class="hero__count-lbl" id="countLbl">kvar till release</p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="#join"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4.6A18 18 0 0 0 15.6 3l-.6 1.2a16 16 0 0 0-6 0L8.4 3A18 18 0 0 0 4 4.6C1.2 8.8.4 12.9.8 17a18 18 0 0 0 5.4 2.7l1.2-1.9-1.9-.9.5-.4a12.8 12.8 0 0 0 12 0l.5.4-1.9.9 1.2 1.9A18 18 0 0 0 23.2 17c.5-4.8-.8-8.9-3.2-12.4ZM8.5 14.6c-1 0-1.9-1-1.9-2.2s.8-2.2 1.9-2.2 1.9 1 1.9 2.2-.8 2.2-1.9 2.2Zm7 0c-1 0-1.9-1-1.9-2.2s.8-2.2 1.9-2.2 1.9 1 1.9 2.2-.8 2.2-1.9 2.2Z"/></svg>Gå med i Discord</a>
+      <span class="hero-cta"><a class="btn btn--ghost" id="heroSecond" href="#resan">Se resan</a><img class="hint-arrow" id="heroArrow" src="ach/arrow.webp" alt="" hidden></span>
+    </div>
+    <a class="hero__scroll" href="#resan" aria-label="Scrolla ner"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></a>
+  </section>
+  <div class="ticker" aria-label="Senaste dings"><div class="ticker__row" id="ticker"></div></div>
+
+  <!-- Demons sektioner. På rekryteringssidan (build_demo.py, --recruit) visas de i en overlay ovanpå sidan. -->
+  <div class="showcase" id="showcase">
+    <button class="btn btn--ghost btn--sm showcase__x" type="button" id="showcaseClose">Stäng ✕</button>
+      <section class="journey" id="resan" style="padding-top:clamp(48px,6vw,80px)">
+    <div class="wrap">
+      <p class="eyebrow" id="resanEyebrow">Resan</p>
+      <h2 class="d1" id="resanTitle">Hela guilden, <span>dag för dag</span></h2>
+      <p class="lede" id="resanLede">Från Goldshire Inn till Onyxia’s Lair. Här finns hela guilden, var och en på sin level. Se oss ta oss dit tillsammans, en ding i taget. Vem hinner först? Vilka formar Förstafemman?</p>
+      <form class="me-bar" id="finder" autocomplete="off">
+        <b class="me-bar__lbl">Vem är du?</b>
+        <input id="who" list="names" placeholder="Ditt namn i spelet" aria-label="Ditt namn i spelet">
+        <button class="btn btn--primary btn--sm" type="submit">Det är jag!</button>
+        <button class="help" type="button" aria-label="Vad händer?" data-tip="Skriv ditt namn, så lyser du upp överallt på sidan.">?</button>
+        <p id="finderMsg" aria-live="polite"></p>
+      </form>
+      <span class="src" id="srcRoster" title="Data från Blizzards API, hämtas var 30:e minut"></span>
+      <div class="kpis" id="kpis"></div>
+      <div class="board-scroll"><div class="board" id="board"></div></div>
+      <div class="player" id="player">
+        <button class="player__play" type="button" id="play" aria-label="Spela upp"><svg viewBox="0 0 24 24" fill="currentColor" id="playIco"><path d="M7 4l13 8-13 8z"/></svg></button>
+        <div class="player__day" id="dayLbl"></div>
+        <input type="range" id="t" min="1" max="12" step="0.05" value="12" aria-label="Dag sedan release">
+        <div class="play-hint" id="playHint" hidden><img src="ach/arrow.webp" alt=""><span>Tryck här och se guilden levla!</span></div>
+      </div>
+      <p class="dayline" id="dayline"></p>
+      <div class="crowns" id="crowns"></div>
+      <div class="crowns-head"><h3>Förstafemman <span class="count" id="fiveLbl"></span></h3><p>Vilka fem formar den eftertraktade Förstafemman? Blir det du?</p></div>
+      <div class="five" id="five"></div>
+
+      <p class="eyebrow" id="bedrifter" style="margin-top:110px;scroll-margin-top:150px">Achievements</p>
+      <h2 class="d2">Guildens <span>achievements</span></h2>
+      <p class="lede">Vissa saker klarar man själv. Det mesta klarar vi tillsammans.</p>
+      <p class="ach-sum" id="achSum"></p>
+      <div class="achs" id="achs"></div>
+    </div>
+  </section>
+
+  <section id="statistik" style="padding-top:clamp(40px,5vw,70px)">
+    <div class="wrap">
+      <p class="eyebrow">Statistik</p>
+      <h2 class="d1">Resan i <span>siffror</span></h2>
+      <p class="lede">Vem är guildens Jokerd? Vilken kväll gick det som tåget? Vem dingar fortfarande klockan fyra på natten, och vem ”jobbar” hemifrån?</p>
+      <div class="stat-grid">
+        <div class="stat-box">
+          <h3>Levels per dag</h3>
+          <div class="chart-scroll"><svg id="perDay" viewBox="0 0 880 236" aria-label="Guildens levels per dag"></svg></div>
+          <p class="stat-read" id="perDayRead"></p>
+        </div>
+        <div class="stat-box">
+          <h3>När på dygnet vi dingar</h3>
+          <div class="chart-scroll"><svg id="hours" viewBox="0 0 880 236" aria-label="Dings per timme"></svg></div>
+          <p class="stat-read" id="hoursRead"></p>
+        </div>
+      </div>
+      <div class="quirks" id="quirks"></div>
+    </div>
+  </section>
+
+  <section id="topp">
+    <div class="wrap">
+      <p class="eyebrow">Topplistor</p>
+      <h2 class="d1">Guildens <span>highscore</span></h2>
+      <p class="lede">Här avgörs vem som får skryta i Discord ikväll.</p>
+      <div class="lb-tabs" id="lbTabs"></div>
+      <div class="lb-cls" id="lbCls"></div>
+      <div class="lb"><div class="lb-left"><div class="lb-title" id="lbTitle"></div><div class="podium" id="podium"></div></div><div class="lb-list" id="lbList"></div></div>
+    </div>
+  </section>
+
+  <section id="grupp">
+    <div class="wrap split">
+      <div class="lfg-left">
+        <div class="stone" aria-hidden="true"><img src="ach/meetingstone.webp" alt=""></div>
+        <p class="eyebrow">Hitta en grupp</p>
+        <h2 class="d2">Vem kan jag <span>köra med?</span></h2>
+        <p class="lede">Det är gemenskapen som håller oss samman. Därför har vi vår egen dungeon finder!</p>
+        <p class="lede meme" id="lfgLede"></p>
+        <div class="seg dung-f" id="dungF" role="group" aria-label="Vilka dungeons">
+          <button type="button" data-f="new" aria-pressed="true">Nya i Forever</button><button type="button" data-f="all" aria-pressed="false">Alla</button><button type="button" data-f="classic" aria-pressed="false">Klassiska</button>
+        </div>
+        <div class="chips" id="chips"></div>
+      </div>
+      <div class="lfg-col">
+        <span class="lfg-eye" aria-hidden="true"></span>
+        <div class="party" id="party"></div>
+        <div class="lfg" id="lfg"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="jamfor" style="padding-top:0">
+    <div class="wrap split">
+      <div>
+        <p class="eyebrow">Jämför</p>
+        <h2 class="d2">Du mot <span>en kompis</span></h2>
+        <p class="lede">Sluta bråka med dina vänner. Nu finns det statistik på vem som är sämst i kompisgänget.</p>
+        <div class="cmp-ctl"><input id="cmpA" list="names" aria-label="Första namnet"><span>mot</span><input id="cmpB" list="names" aria-label="Andra namnet"></div>
+        <div class="cmp-read" id="cmpRead"></div>
+      </div>
+      <div class="vs" id="vs"></div>
+    </div>
+    <div class="wrap"><div class="chart-box" id="chartBox" style="margin-top:28px"><svg id="chart" viewBox="0 0 880 350" aria-label="Levelkurvor per dag"></svg></div></div>
+  </section>
+
+  <section id="nya" style="padding-top:0">
+    <div class="wrap">
+      <p class="eyebrow">Nya hemma</p>
+      <div class="growth" id="growth"></div>
+      <div class="newbies" id="newbies"></div>
+    </div>
+  </section>
+
+  </div>
+
+  <section id="faq">
+    <div class="wrap">
+      <figure class="quote" style="margin-top:0">
+        <blockquote>A Guild <span>of Guilds.</span></blockquote>
+        <figcaption class="slogan">Många gamla gäng, ett hem</figcaption>
+      </figure>
+    </div>
+    <div class="narrow faq-col" style="margin-top:80px">
+          <div class="stone stone--quote" aria-hidden="true"><img src="ach/meetingstone.webp" alt=""></div>
+      <p class="eyebrow">Om oss</p>
+      <h2 class="d2">Bra <span>att veta</span></h2>
+      <div class="faq">
+        <details open><summary>Vad är HEMMET?</summary><p>En gemensam guild för spelare från många gamla gäng. I Forever samlas vi under ett och samma tak, med samma villkor för alla. Ingen grupp äger guilden, och ingen står utanför.</p></details>
+        <details><summary>Vad händer med mitt gamla gäng?</summary><p>Spela gärna med dem som vanligt. Gängen får däremot inga egna officiella roller i guildens struktur. I HEMMET är alla medlemmar på samma villkor.</p></details>
+        <details><summary>Är ni en hardcore-guild?</summary><p>Vi jagar inte world firsts. Vi är en samlingsplats för duktiga spelare med olika möjligheter. Vi har grupper som parsear högt, och grupper som får lite extra hjälp. Raida med folk du känner, i en struktur som gör det lätt att komma med.</p></details>
+        <details><summary>Hur raidar vi?</summary>
+          <div class="sizes">
+            <div><b>10</b><span>Fritt</span><p>Mindre grupper och raidledare sköter dessa ganska fritt. Mer roaming och FFA.</p></div>
+            <div><b>20</b><span>Guilden planerar</span><p>Guilden tar ett större ansvar för planering och samordning.</p></div>
+            <div><b>40</b><span>Guilden planerar</span><p>Guilden planerar, fyller platserna och ser till att kvällen har ledare.</p></div>
+          </div>
+        </details>
+        <details><summary>Hur fungerar loot?</summary><p>Systemet vi har diskuterat är SoftRes med roll. Före raiden reserverar du det föremål du helst vill ha. Droppar det rollar bara de som reserverat, och högst vinner. Har ingen reserverat är det fri roll. Detaljerna bestäms senare. Testa här:</p><div class="sr-box" id="sr"></div></details>
+        <details><summary>Var kommer siffrorna på sidan ifrån?</summary><p>Från Blizzards officiella API, som vi frågar var 30:e minut: level, item level, HP, honorable kills, utrustning, rykten och porträtt. Ur det räknar vi fram dings, kronor och achievements. Ingen addon behövs. Passlängderna är uppskattade: Blizzard visar när du loggar in men inte när du loggar ut, så vi ser det först när profilen uppdateras, med högst en halvtimmes fel.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="join" id="join">
+    <canvas id="fireEmbers" aria-hidden="true"></canvas>
+    <div class="narrow">
+      <p class="eyebrow">Flytta in</p>
+      <h2 class="d1">Det finns plats <span>vid elden</span></h2>
+      <p class="lede">Kom som du är, och ta med dina vänner.</p>
+      <p class="slogan">Välkommen hem.</p>
+      <div class="join__btns">
+        <a class="btn btn--primary" href="https://discord.gg/NhhGAZaVk" target="_blank" rel="noopener">Gå med i Discord</a>
+        <a class="btn btn--ghost" href="https://forms.gle/cJNsWBnYfTiQd9bu9" target="_blank" rel="noopener">Inneboendekontrakt</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer><span>&lt;HEMMET&gt; · EU · WoW Forever</span><span id="footData">Data från Blizzards API.</span></footer>
+<dialog class="armory" id="armory" aria-label="Armory"></dialog>
+<div class="toast" id="toast" aria-live="polite"></div>
+<div class="demo-badge" id="demoBadge" hidden>Förhandsvisning · exempeldata</div>
+<div class="tip" id="tip" hidden></div>
+<datalist id="names"></datalist>
+
+<script>
+const DATA = __DATA__;
+__APP__
+</script>
