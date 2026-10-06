@@ -887,7 +887,6 @@ if (ME) { $("who").value = ME.name; setMe(ME.name, true); }
 if (RECRUIT) {
   document.body.classList.add("is-recruit");
   fetchDiscord(); setInterval(fetchDiscord, 5 * 60e3);
-  document.title = "HEMMET · A Guild of Guilds";
   const second = $("heroSecond");
   second.textContent = "Se vad som väntar"; second.classList.replace("btn--ghost", "btn--primary");
   const discord = document.querySelector("#hero .btn-row > a.btn--primary"); if (discord) discord.classList.replace("btn--primary", "btn--ghost");
