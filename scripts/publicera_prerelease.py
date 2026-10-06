@@ -42,7 +42,7 @@ def main():
         return
     git("commit", "-q", "-m", f"Rekryteringssidan {datetime.now():%Y-%m-%d %H:%M}")
     git("push", "-q", "origin", "main")
-    print("Pushat. Sidan publiceras om en minut: https://fredrik-holmlund.github.io/hemmet_prerelease/")
+    print("Pushat. Sidan publiceras om en minut: https://hemmet.wtf")
 
 
 if __name__ == "__main__":

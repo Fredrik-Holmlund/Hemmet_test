@@ -158,7 +158,7 @@ Texterna för demon sätts i `app.js` (`if (DEMO_MODE) { … }`).
 Flytta in syns. "Se vad som väntar" (hero och meny) öppnar demons sektioner i en overlay ovanpå sidan (`#showcase`),
 med "Stäng" och Esc. FAQ- och Flytta in-knapparna inne i overlayen stänger den och scrollar dit. Publiceras med `python scripts/publicera_prerelease.py`: bygger, kopierar till repot
 `hemmet_prerelease` (utcheckat bredvid projektet) och pushar; dess Pages-flöde lägger ut den på
-https://fredrik-holmlund.github.io/hemmet_prerelease/. Remsan under heron visar Discords medlemmar och online (live).
+https://hemmet.wtf (domänen på GoDaddy pekar dit). Remsan under heron visar Discords medlemmar och online (live).
 
 **Pilarna** (den handritade pilen i `assets/raw/interface/arrow.png`, färgad guld av bygget): en per sida och de pekar på
 det man ska prova. På rekryteringssidan mot "Se vad som väntar", i demon mot spelknappen ("Tryck här och se guilden levla!",
