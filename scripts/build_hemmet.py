@@ -228,6 +228,8 @@ def main():
     html = html.replace('url("avatars.webp")', f'url("{pre}avatars.webp")').replace('url("icons.webp")', f'url("{pre}icons.webp")')
     if args.name:   # egen sida: guildens namn i titeln så att sidorna går att skilja åt
         html = html.replace("<title>HEMMET</title>", "<title>HEMMET · Förhandsvisning</title>" if args.demo else f"<title>HEMMET · {data['guild']}</title>", 1)
+    if args.demo:   # demo och rekryteringssida: bara för den som fått länken, inte sökmotorer
+        html = html.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">', 1)
     (SITE / page).write_text(html, encoding="utf-8")
     print(f"{len(members)} medlemmar · {len(avatars)} porträtt · {len(icons)} ikoner · {len(dates)} snapshots · "
           f"{(SITE / page).stat().st_size // 1024} KB {page}")
