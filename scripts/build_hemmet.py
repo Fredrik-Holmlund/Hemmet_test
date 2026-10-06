@@ -117,6 +117,12 @@ def build_wow_art():
     gold = Image.new("RGBA", arrow.size, (240, 210, 122, 255))
     gold.putalpha(arrow.getchannel("A"))
     gold.save(out / "arrow.webp", "WEBP", lossless=True)
+    # loggan (H:et i sigillet, vit bakgrund borttagen) i två storlekar: sidan och flikikonen
+    logo = Image.open(ROOT / "assets" / "raw" / "logo" / "hemmet-h.png").convert("RGBA")
+    logo.resize((240, round(240 * logo.height / logo.width)), Image.LANCZOS).save(out / "logo.webp", "WEBP", quality=92)
+    icon = Image.new("RGBA", (max(logo.size),) * 2)
+    icon.alpha_composite(logo, ((icon.width - logo.width) // 2, (icon.height - logo.height) // 2))
+    icon.resize((64, 64), Image.LANCZOS).save(out / "logo-64.png")
     return {n: i for i, n in enumerate(names)}
 
 
