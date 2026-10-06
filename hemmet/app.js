@@ -51,9 +51,8 @@ const byIdx = [...members];
 members.sort((a, b) => b.level - a.level || (b.ilvl ?? 0) - (a.ilvl ?? 0));
 const byName = Object.fromEntries(members.map((m) => [m.name.toLowerCase(), m]));
 $("names").innerHTML = members.map((m) => `<option value="${esc(m.name)}">`).join("");
-$("footData").textContent = DEMO_MODE
-  ? "Förhandsvisning med exempeldata. När Forever öppnar hämtas allt från Blizzards API."
-  : `Data från Blizzards API för <${DATA.guild}> på ${DATA.realm}, hämtad ${DATA.generated}.`;
+if (DEMO_MODE) $("footData").hidden = true;
+else $("footData").textContent = `Data från Blizzards API för <${DATA.guild}> på ${DATA.realm}, hämtad ${DATA.generated}.`;
 if (DEMO_MODE) {
   // "vad som kommer"-texter, den säljande inledningen och märkningen
   document.body.classList.add("is-demo");
