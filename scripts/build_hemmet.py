@@ -235,6 +235,17 @@ def main():
     if args.name:   # egen sida: guildens namn i titeln så att sidorna går att skilja åt
         if args.recruit:   # rekryteringssidan heter bara HEMMET, med kort beskrivning för delade länkar
             html = html.replace('content="<HEMMET> – en guild för spelare från många gamla gäng. PUGs among friends i WoW Forever."', 'content="En Guild of Guilds i WoW Forever."', 1)
+            # Google Analytics (bara hemmet.wtf): först i <head> som Google vill
+            html = html.replace('<meta charset="utf-8">', '''<meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7J22MCW321"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7J22MCW321');
+</script>''', 1)
         else:
             html = html.replace("<title>HEMMET</title>", "<title>HEMMET · Förhandsvisning</title>" if args.demo else f"<title>HEMMET · {data['guild']}</title>", 1)
     if args.demo:   # demo och rekryteringssida: bara för den som fått länken, inte sökmotorer
