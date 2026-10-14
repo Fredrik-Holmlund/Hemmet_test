@@ -1,0 +1,48 @@
+# Spanar en gång om dagen efter Blizzards API för WoW Forever (scripts/api_vakt.py).
+# Vid fynd skapas ett issue som nämner ägaren, så att GitHub skickar ett mejl.
+# Bara ett öppet vakt-issue åt gången: stäng det när fyndet är omhändertaget.
+name: API-vakt
+
+on:
+  schedule:
+    - cron: "17 6 * * *"     # varje morgon (GitHub kan komma sent, det gör inget här)
+  workflow_dispatch:
+    inputs:
+      prov:
+        description: "Provlarm: skapa ett issue även utan fynd (testar mejlet)"
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  vakt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Spana
+        id: spana
+        env:
+          BNET_ID: ${{ secrets.BNET_ID }}
+          BNET_SECRET: ${{ secrets.BNET_SECRET }}
+        run: python scripts/api_vakt.py ${{ inputs.prov && '--prov' || '' }}
+
+      - name: Larma
+        if: steps.spana.outputs.fynd == 'ja'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -n "$(gh issue list --state open --label api-vakt --json number --jq '.[].number')" ]; then
+            echo "Det finns redan ett öppet vakt-issue"; exit 0
+          fi
+          gh label create api-vakt --color D4A017 --description "Fynd från API-vakten" 2>/dev/null || true
+          printf '@%s\n\n' "${{ github.repository_owner }}" | cat - vakt-rapport.md > issue.md
+          gh issue create --title "API-vakt: något nytt hos Blizzard" --label api-vakt --body-file issue.md
