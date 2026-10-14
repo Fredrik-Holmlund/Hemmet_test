@@ -248,8 +248,10 @@ def main():
 </script>''', 1)
         else:
             html = html.replace("<title>HEMMET</title>", "<title>HEMMET · Förhandsvisning</title>" if args.demo else f"<title>HEMMET · {data['guild']}</title>", 1)
-    if args.demo:   # demo och rekryteringssida: bara för den som fått länken, inte sökmotorer
+    if args.demo and not args.recruit:   # ledningsdemon: bara för den som fått länken, inte sökmotorer
         html = html.replace('<meta charset="utf-8">', '<meta charset="utf-8">\n<meta name="robots" content="noindex, nofollow">', 1)
+    if args.recruit:   # hemmet.wtf ska synas på Google: en kanonisk adress
+        html = html.replace('<link rel="icon"', '<link rel="canonical" href="https://hemmet.wtf/">\n<link rel="icon"', 1)
     (SITE / page).write_text(html, encoding="utf-8")
     print(f"{len(members)} medlemmar · {len(avatars)} porträtt · {len(icons)} ikoner · {len(dates)} snapshots · "
           f"{(SITE / page).stat().st_size // 1024} KB {page}")

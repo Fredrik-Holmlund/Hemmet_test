@@ -36,6 +36,19 @@ def main():
         if p.name == ".htaccess":   # bara för Apache-värdar; Pages läser den inte
             continue
         (shutil.copytree if p.is_dir() else shutil.copy2)(p, REPO / p.name)
+    # sökmotorerna: får indexera allt, och sitemapen pekar ut sidan
+    (REPO / "robots.txt").write_text("User-agent: *
+Allow: /
+
+Sitemap: https://hemmet.wtf/sitemap.xml
+", encoding="utf-8")
+    (REPO / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+'
+        f'  <url><loc>https://hemmet.wtf/</loc><lastmod>{datetime.now():%Y-%m-%d}</lastmod></url>
+</urlset>
+', encoding="utf-8")
     git("add", "-A")
     if not git("status", "--porcelain").strip():
         print("Inget nytt att publicera.")
