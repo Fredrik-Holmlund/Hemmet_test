@@ -1,4 +1,4 @@
-"""Bygger rekryteringssidan (DEMO_LIVE/) och pushar den till repot hemmet_prerelease, som publicerar den på GitHub Pages.
+r"""Bygger rekryteringssidan (DEMO_LIVE/) och pushar den till repot hemmet_prerelease, som publicerar den på GitHub Pages.
 
 Repot ligger utcheckat bredvid projektet: C:\JOBB\Wow Forever\hemmet_prerelease. Allt utom .git, .github och README ersätts.
   python scripts/publicera_prerelease.py            # bygg och publicera
