@@ -235,6 +235,7 @@ def main():
     if args.name:   # egen sida: guildens namn i titeln så att sidorna går att skilja åt
         if args.recruit:   # rekryteringssidan heter bara HEMMET, med kort beskrivning för delade länkar
             html = html.replace('content="<HEMMET> – en guild för spelare från många gamla gäng. PUGs among friends i WoW Forever."', 'content="En Guild of Guilds i WoW Forever."', 1)
+            html = html.replace("<title>HEMMET</title>", "<title>HEMMET – svensk guild i WoW Forever</title>", 1)   # det folk söker på
             # Google Analytics (bara hemmet.wtf): först i <head> som Google vill
             html = html.replace('<meta charset="utf-8">', '''<meta charset="utf-8">
 <!-- Google tag (gtag.js) -->
