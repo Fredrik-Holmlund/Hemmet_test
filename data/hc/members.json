@@ -1,7 +1,7 @@
 {
  "guild": "Frienship",
  "realm": "stitches",
- "generated": "2026-10-14 23:11",
+ "generated": "2026-10-15 01:52",
  "members": [
   {
    "name": "Abinadi",
@@ -76922,6 +76922,166 @@
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/178/80935602-main-raw.png"
   },
   {
+   "name": "Scarletveil",
+   "id": 98572056,
+   "level": 56,
+   "rank": 8,
+   "cls": "paladin",
+   "race": 1,
+   "profile": true,
+   "gender": 0,
+   "lastLogin": 1792025888000,
+   "ilvl": 50,
+   "xp": 13055,
+   "title": null,
+   "hp": 2601,
+   "power": 2984,
+   "powerType": "Mana",
+   "stats": {
+    "strength": 179,
+    "agility": 86,
+    "stamina": 158,
+    "intellect": 123,
+    "spirit": 114,
+    "attack_power": 584,
+    "spell_power": 0,
+    "armor": 2688,
+    "melee_crit": 13.42,
+    "ranged_crit": 4.5,
+    "spell_crit": 5.73
+   },
+   "hk": 0,
+   "pvpRank": 0,
+   "gear": [
+    {
+     "slot": 0,
+     "id": 11124,
+     "name": "Helm of Exile",
+     "quality": 3,
+     "itemLevel": 55,
+     "icon": "inv_helmet_21"
+    },
+    {
+     "slot": 1,
+     "id": 12044,
+     "name": "Arctic Pendant of the Tiger",
+     "quality": 2,
+     "itemLevel": 51,
+     "icon": "inv_jewelry_necklace_07"
+    },
+    {
+     "slot": 2,
+     "id": 9476,
+     "name": "Big Bad Pauldrons",
+     "quality": 3,
+     "itemLevel": 50,
+     "icon": "inv_shoulder_01"
+    },
+    {
+     "slot": 4,
+     "id": 14915,
+     "name": "Jade Breastplate of Strength",
+     "quality": 2,
+     "itemLevel": 53,
+     "icon": "inv_chest_plate07"
+    },
+    {
+     "slot": 5,
+     "id": 8277,
+     "name": "Valorous Girdle",
+     "quality": 2,
+     "itemLevel": 46,
+     "icon": "inv_belt_19"
+    },
+    {
+     "slot": 6,
+     "id": 21316,
+     "name": "Leggings of the Ursa",
+     "quality": 2,
+     "itemLevel": 55,
+     "icon": "inv_pants_mail_10"
+    },
+    {
+     "slot": 7,
+     "id": 10846,
+     "name": "Bloodshot Greaves",
+     "quality": 3,
+     "itemLevel": 54,
+     "icon": "inv_boots_01"
+    },
+    {
+     "slot": 8,
+     "id": 17714,
+     "name": "Bracers of the Stone Princess",
+     "quality": 3,
+     "itemLevel": 54,
+     "icon": "inv_bracer_14"
+    },
+    {
+     "slot": 9,
+     "id": 17736,
+     "name": "Rockgrip Gauntlets",
+     "quality": 3,
+     "itemLevel": 53,
+     "icon": "inv_gauntlets_28"
+    },
+    {
+     "slot": 10,
+     "id": 13095,
+     "name": "Assault Band",
+     "quality": 3,
+     "itemLevel": 44,
+     "icon": "inv_jewelry_ring_04"
+    },
+    {
+     "slot": 11,
+     "id": 11118,
+     "name": "Archaedic Stone of the Owl",
+     "quality": 3,
+     "itemLevel": 47,
+     "icon": "inv_stone_15"
+    },
+    {
+     "slot": 12,
+     "id": 1490,
+     "name": "Guardian Talisman",
+     "quality": 2,
+     "itemLevel": 50,
+     "icon": "inv_jewelry_talisman_05"
+    },
+    {
+     "slot": 13,
+     "id": 17774,
+     "name": "Mark of the Chosen",
+     "quality": 2,
+     "itemLevel": 48,
+     "icon": "inv_jewelry_talisman_08"
+    },
+    {
+     "slot": 14,
+     "id": 9908,
+     "name": "Royal Cape of the Eagle",
+     "quality": 2,
+     "itemLevel": 43,
+     "icon": "inv_misc_cape_02"
+    },
+    {
+     "slot": 15,
+     "id": 9413,
+     "name": "The Rockpounder",
+     "quality": 3,
+     "itemLevel": 49,
+     "icon": "inv_hammer_12"
+    }
+   ],
+   "heal": 0,
+   "spec": "Retribution",
+   "role": "dps",
+   "exalted": [],
+   "avatar": true,
+   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/24/98572056-main-raw.png"
+  },
+  {
    "name": "Smålandpala",
    "id": 88611449,
    "level": 56,
@@ -78896,166 +79056,6 @@
    "exalted": [],
    "avatar": true,
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/184/73282744-main-raw.png"
-  },
-  {
-   "name": "Scarletveil",
-   "id": 98572056,
-   "level": 55,
-   "rank": 8,
-   "cls": "paladin",
-   "race": 1,
-   "profile": true,
-   "gender": 0,
-   "lastLogin": 1791980297000,
-   "ilvl": 49,
-   "xp": 139304,
-   "title": null,
-   "hp": 2641,
-   "power": 3107,
-   "powerType": "Mana",
-   "stats": {
-    "strength": 154,
-    "agility": 85,
-    "stamina": 166,
-    "intellect": 133,
-    "spirit": 113,
-    "attack_power": 551,
-    "spell_power": 0,
-    "armor": 3058,
-    "melee_crit": 13.58,
-    "ranged_crit": 4.7,
-    "spell_crit": 5.93
-   },
-   "hk": 0,
-   "pvpRank": 0,
-   "gear": [
-    {
-     "slot": 0,
-     "id": 11124,
-     "name": "Helm of Exile",
-     "quality": 3,
-     "itemLevel": 55,
-     "icon": "inv_helmet_21"
-    },
-    {
-     "slot": 1,
-     "id": 12044,
-     "name": "Arctic Pendant of the Tiger",
-     "quality": 2,
-     "itemLevel": 51,
-     "icon": "inv_jewelry_necklace_07"
-    },
-    {
-     "slot": 2,
-     "id": 9476,
-     "name": "Big Bad Pauldrons",
-     "quality": 3,
-     "itemLevel": 50,
-     "icon": "inv_shoulder_01"
-    },
-    {
-     "slot": 4,
-     "id": 17777,
-     "name": "Relentless Chain",
-     "quality": 2,
-     "itemLevel": 47,
-     "icon": "inv_chest_chain_07"
-    },
-    {
-     "slot": 5,
-     "id": 8277,
-     "name": "Valorous Girdle",
-     "quality": 2,
-     "itemLevel": 46,
-     "icon": "inv_belt_19"
-    },
-    {
-     "slot": 6,
-     "id": 21316,
-     "name": "Leggings of the Ursa",
-     "quality": 2,
-     "itemLevel": 55,
-     "icon": "inv_pants_mail_10"
-    },
-    {
-     "slot": 7,
-     "id": 10846,
-     "name": "Bloodshot Greaves",
-     "quality": 3,
-     "itemLevel": 54,
-     "icon": "inv_boots_01"
-    },
-    {
-     "slot": 8,
-     "id": 17714,
-     "name": "Bracers of the Stone Princess",
-     "quality": 3,
-     "itemLevel": 54,
-     "icon": "inv_bracer_14"
-    },
-    {
-     "slot": 9,
-     "id": 17736,
-     "name": "Rockgrip Gauntlets",
-     "quality": 3,
-     "itemLevel": 53,
-     "icon": "inv_gauntlets_28"
-    },
-    {
-     "slot": 10,
-     "id": 13095,
-     "name": "Assault Band",
-     "quality": 3,
-     "itemLevel": 44,
-     "icon": "inv_jewelry_ring_04"
-    },
-    {
-     "slot": 11,
-     "id": 11118,
-     "name": "Archaedic Stone of the Owl",
-     "quality": 3,
-     "itemLevel": 47,
-     "icon": "inv_stone_15"
-    },
-    {
-     "slot": 12,
-     "id": 1490,
-     "name": "Guardian Talisman",
-     "quality": 2,
-     "itemLevel": 50,
-     "icon": "inv_jewelry_talisman_05"
-    },
-    {
-     "slot": 13,
-     "id": 17774,
-     "name": "Mark of the Chosen",
-     "quality": 2,
-     "itemLevel": 48,
-     "icon": "inv_jewelry_talisman_08"
-    },
-    {
-     "slot": 14,
-     "id": 9908,
-     "name": "Royal Cape of the Eagle",
-     "quality": 2,
-     "itemLevel": 43,
-     "icon": "inv_misc_cape_02"
-    },
-    {
-     "slot": 15,
-     "id": 9413,
-     "name": "The Rockpounder",
-     "quality": 3,
-     "itemLevel": 49,
-     "icon": "inv_hammer_12"
-    }
-   ],
-   "heal": 0,
-   "spec": "Retribution",
-   "role": "dps",
-   "exalted": [],
-   "avatar": true,
-   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/24/98572056-main-raw.png"
   },
   {
    "name": "Spoonthief",
@@ -85818,6 +85818,190 @@
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/124/96340604-main-raw.png"
   },
   {
+   "name": "Litenskit",
+   "id": 86286716,
+   "level": 50,
+   "rank": 6,
+   "cls": "warrior",
+   "race": 1,
+   "profile": true,
+   "gender": 0,
+   "lastLogin": 1792022528000,
+   "ilvl": 46,
+   "xp": 2725,
+   "title": null,
+   "hp": 2969,
+   "power": 100,
+   "powerType": "Rage",
+   "stats": {
+    "strength": 196,
+    "agility": 112,
+    "stamina": 207,
+    "intellect": 28,
+    "spirit": 40,
+    "attack_power": 522,
+    "spell_power": 0,
+    "armor": 2484,
+    "melee_crit": 14.71,
+    "ranged_crit": 5.43,
+    "spell_crit": 1.0
+   },
+   "hk": 0,
+   "pvpRank": 0,
+   "gear": [
+    {
+     "slot": 0,
+     "id": 10090,
+     "name": "Gothic Plate Helmet of the Bear",
+     "quality": 2,
+     "itemLevel": 46,
+     "icon": "inv_helmet_10"
+    },
+    {
+     "slot": 1,
+     "id": 13087,
+     "name": "River Pride Choker",
+     "quality": 3,
+     "itemLevel": 33,
+     "icon": "inv_jewelry_necklace_09"
+    },
+    {
+     "slot": 2,
+     "id": 7718,
+     "name": "Herod's Shoulder",
+     "quality": 3,
+     "itemLevel": 42,
+     "icon": "inv_shoulder_01"
+    },
+    {
+     "slot": 3,
+     "id": 38,
+     "name": "Recruit's Shirt",
+     "quality": 1,
+     "itemLevel": 1,
+     "icon": "inv_shirt_05"
+    },
+    {
+     "slot": 4,
+     "id": 10775,
+     "name": "Carapace of Tuten'kash",
+     "quality": 3,
+     "itemLevel": 42,
+     "icon": "inv_chest_plate08"
+    },
+    {
+     "slot": 5,
+     "id": 10329,
+     "name": "Scarlet Belt",
+     "quality": 2,
+     "itemLevel": 37,
+     "icon": "inv_belt_06"
+    },
+    {
+     "slot": 6,
+     "id": 10133,
+     "name": "Revenant Leggings of the Bear",
+     "quality": 2,
+     "itemLevel": 52,
+     "icon": "inv_pants_03"
+    },
+    {
+     "slot": 7,
+     "id": 13068,
+     "name": "Obsidian Greaves",
+     "quality": 3,
+     "itemLevel": 42,
+     "icon": "inv_boots_plate_09"
+    },
+    {
+     "slot": 8,
+     "id": 9972,
+     "name": "Embossed Plate Bracers of the Bear",
+     "quality": 2,
+     "itemLevel": 42,
+     "icon": "inv_bracer_03"
+    },
+    {
+     "slot": 9,
+     "id": 7938,
+     "name": "Truesilver Gauntlets",
+     "quality": 3,
+     "itemLevel": 45,
+     "icon": "inv_gauntlets_29"
+    },
+    {
+     "slot": 10,
+     "id": 12001,
+     "name": "Onyx Ring of the Bear",
+     "quality": 2,
+     "itemLevel": 50,
+     "icon": "inv_jewelry_ring_01"
+    },
+    {
+     "slot": 11,
+     "id": 9533,
+     "name": "Masons Fraternity Ring",
+     "quality": 3,
+     "itemLevel": 47,
+     "icon": "inv_jewelry_ring_03"
+    },
+    {
+     "slot": 12,
+     "id": 2820,
+     "name": "Nifty Stopwatch",
+     "quality": 2,
+     "itemLevel": 50,
+     "icon": "inv_misc_pocketwatch_01"
+    },
+    {
+     "slot": 13,
+     "id": 11122,
+     "name": "Carrot on a Stick",
+     "quality": 2,
+     "itemLevel": 50,
+     "icon": "inv_misc_food_54"
+    },
+    {
+     "slot": 14,
+     "id": 14673,
+     "name": "Pridelord Cape",
+     "quality": 2,
+     "itemLevel": 52,
+     "icon": "inv_misc_cape_10"
+    },
+    {
+     "slot": 15,
+     "id": 17705,
+     "name": "Thrash Blade",
+     "quality": 3,
+     "itemLevel": 53,
+     "icon": "inv_sword_36"
+    },
+    {
+     "slot": 16,
+     "id": 17719,
+     "name": "Inventor's Focal Sword",
+     "quality": 3,
+     "itemLevel": 53,
+     "icon": "inv_sword_14"
+    },
+    {
+     "slot": 17,
+     "id": 4087,
+     "name": "Trueshot Bow of the Monkey",
+     "quality": 2,
+     "itemLevel": 41,
+     "icon": "inv_weapon_bow_10"
+    }
+   ],
+   "heal": 0,
+   "spec": "Fury",
+   "role": "dps",
+   "exalted": [],
+   "avatar": true,
+   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/124/86286716-main-raw.png"
+  },
+  {
    "name": "Nerzak",
    "id": 43854651,
    "level": 50,
@@ -86488,182 +86672,6 @@
    "exalted": null,
    "avatar": true,
    "renderUrl": null
-  },
-  {
-   "name": "Litenskit",
-   "id": 86286716,
-   "level": 49,
-   "rank": 6,
-   "cls": "warrior",
-   "race": 1,
-   "profile": true,
-   "gender": 0,
-   "lastLogin": 1792007312000,
-   "ilvl": 44,
-   "xp": 120455,
-   "title": null,
-   "hp": 2929,
-   "power": 100,
-   "powerType": "Rage",
-   "stats": {
-    "strength": 217,
-    "agility": 111,
-    "stamina": 208,
-    "intellect": 28,
-    "spirit": 40,
-    "attack_power": 561,
-    "spell_power": 0,
-    "armor": 2482,
-    "melee_crit": 16.9,
-    "ranged_crit": 2.74,
-    "spell_crit": 0.0
-   },
-   "hk": 0,
-   "pvpRank": 0,
-   "gear": [
-    {
-     "slot": 0,
-     "id": 10090,
-     "name": "Gothic Plate Helmet of the Bear",
-     "quality": 2,
-     "itemLevel": 46,
-     "icon": "inv_helmet_10"
-    },
-    {
-     "slot": 1,
-     "id": 13087,
-     "name": "River Pride Choker",
-     "quality": 3,
-     "itemLevel": 33,
-     "icon": "inv_jewelry_necklace_09"
-    },
-    {
-     "slot": 2,
-     "id": 7718,
-     "name": "Herod's Shoulder",
-     "quality": 3,
-     "itemLevel": 42,
-     "icon": "inv_shoulder_01"
-    },
-    {
-     "slot": 3,
-     "id": 38,
-     "name": "Recruit's Shirt",
-     "quality": 1,
-     "itemLevel": 1,
-     "icon": "inv_shirt_05"
-    },
-    {
-     "slot": 4,
-     "id": 10775,
-     "name": "Carapace of Tuten'kash",
-     "quality": 3,
-     "itemLevel": 42,
-     "icon": "inv_chest_plate08"
-    },
-    {
-     "slot": 5,
-     "id": 10329,
-     "name": "Scarlet Belt",
-     "quality": 2,
-     "itemLevel": 37,
-     "icon": "inv_belt_06"
-    },
-    {
-     "slot": 6,
-     "id": 10133,
-     "name": "Revenant Leggings of the Bear",
-     "quality": 2,
-     "itemLevel": 52,
-     "icon": "inv_pants_03"
-    },
-    {
-     "slot": 7,
-     "id": 13068,
-     "name": "Obsidian Greaves",
-     "quality": 3,
-     "itemLevel": 42,
-     "icon": "inv_boots_plate_09"
-    },
-    {
-     "slot": 8,
-     "id": 9972,
-     "name": "Embossed Plate Bracers of the Bear",
-     "quality": 2,
-     "itemLevel": 42,
-     "icon": "inv_bracer_03"
-    },
-    {
-     "slot": 9,
-     "id": 7938,
-     "name": "Truesilver Gauntlets",
-     "quality": 3,
-     "itemLevel": 45,
-     "icon": "inv_gauntlets_29"
-    },
-    {
-     "slot": 10,
-     "id": 11999,
-     "name": "Lodestone Hoop of Strength",
-     "quality": 2,
-     "itemLevel": 46,
-     "icon": "inv_jewelry_ring_02"
-    },
-    {
-     "slot": 11,
-     "id": 9533,
-     "name": "Masons Fraternity Ring",
-     "quality": 3,
-     "itemLevel": 47,
-     "icon": "inv_jewelry_ring_03"
-    },
-    {
-     "slot": 12,
-     "id": 2820,
-     "name": "Nifty Stopwatch",
-     "quality": 2,
-     "itemLevel": 50,
-     "icon": "inv_misc_pocketwatch_01"
-    },
-    {
-     "slot": 13,
-     "id": 11122,
-     "name": "Carrot on a Stick",
-     "quality": 2,
-     "itemLevel": 50,
-     "icon": "inv_misc_food_54"
-    },
-    {
-     "slot": 14,
-     "id": 14673,
-     "name": "Pridelord Cape",
-     "quality": 2,
-     "itemLevel": 52,
-     "icon": "inv_misc_cape_10"
-    },
-    {
-     "slot": 15,
-     "id": 6830,
-     "name": "Bonebiter",
-     "quality": 3,
-     "itemLevel": 44,
-     "icon": "inv_axe_04"
-    },
-    {
-     "slot": 17,
-     "id": 4087,
-     "name": "Trueshot Bow of the Monkey",
-     "quality": 2,
-     "itemLevel": 41,
-     "icon": "inv_weapon_bow_10"
-    }
-   ],
-   "heal": 0,
-   "spec": "Arms",
-   "role": "dps",
-   "exalted": [],
-   "avatar": true,
-   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/124/86286716-main-raw.png"
   },
   {
    "name": "Macatoras",
@@ -90490,7 +90498,7 @@
    "race": 1,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792015652000,
+   "lastLogin": 1792022997000,
    "ilvl": 41,
    "xp": 27671,
    "title": null,
@@ -108194,24 +108202,24 @@
    "race": 4,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792018583000,
+   "lastLogin": 1792019927000,
    "ilvl": 27,
-   "xp": 12775,
+   "xp": 19025,
    "title": null,
    "hp": 1559,
    "power": 1669,
    "powerType": "Mana",
    "stats": {
-    "strength": 80,
-    "agility": 123,
+    "strength": 78,
+    "agility": 126,
     "stamina": 107,
     "intellect": 80,
     "spirit": 86,
-    "attack_power": 174,
+    "attack_power": 170,
     "spell_power": 0,
-    "armor": 965,
-    "melee_crit": 6.67,
-    "ranged_crit": 3.83,
+    "armor": 980,
+    "melee_crit": 6.91,
+    "ranged_crit": 4.07,
     "spell_crit": 4.17
    },
    "hk": 0,
@@ -108283,11 +108291,11 @@
     },
     {
      "slot": 8,
-     "id": 14569,
-     "name": "Bristlebark Bindings",
+     "id": 14590,
+     "name": "Hawkeye's Bracers",
      "quality": 2,
-     "itemLevel": 22,
-     "icon": "inv_bracer_08"
+     "itemLevel": 35,
+     "icon": "inv_bracer_04"
     },
     {
      "slot": 9,
