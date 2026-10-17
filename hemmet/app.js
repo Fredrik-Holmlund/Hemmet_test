@@ -892,8 +892,21 @@ if (RECRUIT) {
   $("heroArrow").hidden = false;
   document.querySelector(".topbar nav").innerHTML = `<a href="#resan">Levelingresan</a><a href="raiding/">Raiding</a><a href="#faq">FAQ</a><a href="#join">Flytta in</a>`;
   const showcase = $("showcase");
-  const openCase = () => { document.body.classList.add("show-case"); showcase.scrollTop = 0; requestAnimationFrame(() => { drawBoard(); dispatchEvent(new Event("resize")); }); };
-  const closeCase = () => { document.body.classList.remove("show-case"); stop(); };
+  // Overlayen har en egen adress: hemmet.wtf/levelingresan/ (byggs av bygg.py: samma sida med <base href="../">).
+  // Öppna = adressen blir /levelingresan/, stänga = tillbaka till /, och webbläsarens bakåtknapp stänger den.
+  const ROOT = new URL(".", document.baseURI).pathname, CASE_URL = ROOT + "levelingresan/";
+  const atCase = () => location.pathname.endsWith("/levelingresan/") || location.pathname.endsWith("/levelingresan");
+  const HOME_TITLE = "HEMMET – svensk guild i WoW Forever", CASE_TITLE = "Levelingresan · " + HOME_TITLE;
+  const openCase = (push = true) => {
+    document.body.classList.add("show-case"); showcase.scrollTop = 0; document.title = CASE_TITLE;
+    if (push && !atCase()) history.pushState({ hemmetCase: 1 }, "", CASE_URL);
+    requestAnimationFrame(() => { drawBoard(); dispatchEvent(new Event("resize")); });
+  };
+  const closeCase = (push = true) => {
+    document.body.classList.remove("show-case"); stop(); document.title = HOME_TITLE;
+    if (push && atCase()) history.pushState(null, "", ROOT);
+  };
+  addEventListener("popstate", () => { if (atCase()) openCase(false); else closeCase(false); });
   // "Se vad som väntar" i heron öppnar valet: levelingresan (overlayen) eller raiding (raiding/, egen sida)
   const choose = $("choose");
   const openChoose = () => { choose.hidden = false; choose.querySelector(".choose__card").focus(); };
@@ -906,7 +919,8 @@ if (RECRUIT) {
     if (!choose.hidden) closeChoose(); else if (document.body.classList.contains("show-case")) closeCase();
   });
   const CASE = ["resan", "bedrifter", "statistik", "topp", "grupp", "jamfor", "nya"];
-  if (CASE.includes(location.hash.slice(1))) openCase();   // länkar hit utifrån, t.ex. hemmet.wtf/#resan
+  if (atCase()) openCase(false);   // hemmet.wtf/levelingresan
+  else if (CASE.includes(location.hash.slice(1))) { history.replaceState(null, "", CASE_URL); openCase(false); }   // äldre länkar: /#resan
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a[href^='#']"); if (!a) return;
     const id = a.getAttribute("href").slice(1);
