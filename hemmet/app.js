@@ -890,16 +890,28 @@ if (RECRUIT) {
   second.textContent = "Se vad som väntar"; second.classList.replace("btn--ghost", "btn--primary");
   const discord = document.querySelector("#hero .btn-row > a.btn--primary"); if (discord) discord.classList.replace("btn--primary", "btn--ghost");
   $("heroArrow").hidden = false;
-  document.querySelector(".topbar nav").innerHTML = `<a href="#resan">Se vad som väntar</a><a href="#faq">FAQ</a><a href="#join">Flytta in</a>`;
+  document.querySelector(".topbar nav").innerHTML = `<a href="#resan">Levelingresan</a><a href="raiding/">Raiding</a><a href="#faq">FAQ</a><a href="#join">Flytta in</a>`;
   const showcase = $("showcase");
   const openCase = () => { document.body.classList.add("show-case"); showcase.scrollTop = 0; requestAnimationFrame(() => { drawBoard(); dispatchEvent(new Event("resize")); }); };
   const closeCase = () => { document.body.classList.remove("show-case"); stop(); };
+  // "Se vad som väntar" i heron öppnar valet: levelingresan (overlayen) eller raiding (raiding/, egen sida)
+  const choose = $("choose");
+  const openChoose = () => { choose.hidden = false; choose.querySelector(".choose__card").focus(); };
+  const closeChoose = () => { choose.hidden = true; };
+  $("chooseClose").addEventListener("click", closeChoose);
+  choose.addEventListener("click", (e) => { if (e.target === choose) closeChoose(); });
   $("showcaseClose").addEventListener("click", closeCase);
-  addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("show-case")) closeCase(); });
+  addEventListener("keydown", (e) => {
+    if (e.key !== "Escape") return;
+    if (!choose.hidden) closeChoose(); else if (document.body.classList.contains("show-case")) closeCase();
+  });
+  const CASE = ["resan", "bedrifter", "statistik", "topp", "grupp", "jamfor", "nya"];
+  if (CASE.includes(location.hash.slice(1))) openCase();   // länkar hit utifrån, t.ex. hemmet.wtf/#resan
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a[href^='#']"); if (!a) return;
     const id = a.getAttribute("href").slice(1);
-    if (["resan", "bedrifter", "statistik", "topp", "grupp", "jamfor", "nya"].includes(id) && !showcase.contains(a)) { e.preventDefault(); openCase(); return; }
+    if (a.id === "heroSecond") { e.preventDefault(); openChoose(); return; }
+    if (CASE.includes(id) && !showcase.contains(a)) { e.preventDefault(); closeChoose(); openCase(); return; }
     if (showcase.contains(a) && (id === "faq" || id === "join")) { e.preventDefault(); closeCase(); $(id).scrollIntoView({ behavior: "smooth" }); }
   }, true);
 }
