@@ -120,6 +120,10 @@ def build_wow_art():
     # loggan (H:et i sigillet, vit bakgrund borttagen) i två storlekar: sidan och flikikonen
     logo = Image.open(ROOT / "assets" / "raw" / "logo" / "hemmet-h.png").convert("RGBA")
     logo.resize((240, round(240 * logo.height / logo.width)), Image.LANCZOS).save(out / "logo.webp", "WEBP", quality=92)
+    # korten bakom "Se vad som väntar": Elwynns karta (resan) och Molten Core (raiding), i full upplösning
+    for f in ("leveling", "raiding"):
+        im = Image.open(ROOT / "assets" / "raw" / "choose" / f"{f}.png").convert("RGB")
+        im.resize((900, round(900 * im.height / im.width)), Image.LANCZOS).save(out / f"choose-{f}.webp", "WEBP", quality=86)
     icon = Image.new("RGBA", (max(logo.size),) * 2)
     icon.alpha_composite(logo, ((icon.width - logo.width) // 2, (icon.height - logo.height) // 2))
     icon.resize((64, 64), Image.LANCZOS).save(out / "logo-64.png")
