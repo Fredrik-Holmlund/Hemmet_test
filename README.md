@@ -97,7 +97,7 @@ Reglerna nedan är bestämda efter mycket provande. Följ dem hellre än att hit
 
 | Färg | Betyder | Exempel |
 |---|---|---|
-| **Blått** | Det man gör | Knappar, valda flikar och filter i Alliance-bannerns marinblå (`--navy-500/600`) med guldkant och guldtext. Klarblått bara som ljus (skenet under pallen, meeting stone) |
+| **Blått** | Det man gör | Knappar, valda flikar och filter i loggans färger: turkosblå (`--act-500/600`) med sandfärgad ram (`--act-rim`) och krämvit text (`--act-ink`), sedan 2026-10-17 (marinblå + guld kändes fult). Klarblått bara som ljus (skenet under pallen, meeting stone) |
 | **Guld** | Det man uppnår | Rubrikernas slutord, små rubriker, kronor, klara achievements, din egen rad, "NY"-taggar |
 | Klassfärger | Vem | Bara på namn och porträttramar |
 | Kvalitetsfärger (blå/lila/orange) | Rang | Bara på pallen och kronkorten |
