@@ -1,7 +1,7 @@
 {
  "guild": "Frienship",
  "realm": "stitches",
- "generated": "2026-10-19 00:29",
+ "generated": "2026-10-19 05:13",
  "members": [
   {
    "name": "Abinadi",
@@ -15152,7 +15152,7 @@
    "race": 3,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792342222000,
+   "lastLogin": 1792369581000,
    "ilvl": 67,
    "xp": 0,
    "title": null,
@@ -22883,7 +22883,7 @@
    "race": 7,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792358073000,
+   "lastLogin": 1792372141000,
    "ilvl": 78,
    "xp": 0,
    "title": null,
@@ -28422,7 +28422,7 @@
    "race": 1,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792369384000,
+   "lastLogin": 1792371487000,
    "ilvl": 57,
    "xp": 0,
    "title": null,
@@ -70419,7 +70419,7 @@
    "race": 1,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792337757000,
+   "lastLogin": 1792380117000,
    "ilvl": 63,
    "xp": 0,
    "title": null,
@@ -81914,6 +81914,198 @@
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/136/81186952-main-raw.png"
   },
   {
+   "name": "Sliceandshot",
+   "id": 86547503,
+   "level": 54,
+   "rank": 6,
+   "cls": "hunter",
+   "race": 4,
+   "profile": true,
+   "gender": 0,
+   "lastLogin": 1792370031000,
+   "ilvl": 47,
+   "xp": 726,
+   "title": null,
+   "hp": 2878,
+   "power": 2145,
+   "powerType": "Mana",
+   "stats": {
+    "strength": 50,
+    "agility": 273,
+    "stamina": 186,
+    "intellect": 59,
+    "spirit": 63,
+    "attack_power": 439,
+    "spell_power": 0,
+    "armor": 1709,
+    "melee_crit": 4.04,
+    "ranged_crit": 10.6,
+    "spell_crit": 4.69
+   },
+   "hk": 0,
+   "pvpRank": 0,
+   "gear": [
+    {
+     "slot": 0,
+     "id": 15086,
+     "name": "Wicked Leather Headband",
+     "quality": 2,
+     "itemLevel": 56,
+     "icon": "inv_misc_bandage_13"
+    },
+    {
+     "slot": 1,
+     "id": 12039,
+     "name": "Tundra Necklace of the Monkey",
+     "quality": 2,
+     "itemLevel": 33,
+     "icon": "inv_jewelry_necklace_11"
+    },
+    {
+     "slot": 2,
+     "id": 7459,
+     "name": "Knight's Pauldrons of the Monkey",
+     "quality": 2,
+     "itemLevel": 38,
+     "icon": "inv_shoulder_27"
+    },
+    {
+     "slot": 3,
+     "id": 148,
+     "name": "Rugged Trapper's Shirt",
+     "quality": 1,
+     "itemLevel": 1,
+     "icon": "inv_shirt_01"
+    },
+    {
+     "slot": 4,
+     "id": 8175,
+     "name": "Nightscape Tunic",
+     "quality": 2,
+     "itemLevel": 41,
+     "icon": "inv_chest_leather_03"
+    },
+    {
+     "slot": 5,
+     "id": 19125,
+     "name": "Seared Mail Girdle",
+     "quality": 2,
+     "itemLevel": 49,
+     "icon": "inv_belt_16"
+    },
+    {
+     "slot": 6,
+     "id": 15087,
+     "name": "Wicked Leather Pants",
+     "quality": 2,
+     "itemLevel": 58,
+     "icon": "inv_pants_12"
+    },
+    {
+     "slot": 7,
+     "id": 14653,
+     "name": "Scorpashi Slippers",
+     "quality": 2,
+     "itemLevel": 46,
+     "icon": "inv_boots_01"
+    },
+    {
+     "slot": 8,
+     "id": 16681,
+     "name": "Beaststalker's Bindings",
+     "quality": 3,
+     "itemLevel": 57,
+     "icon": "inv_bracer_17"
+    },
+    {
+     "slot": 9,
+     "id": 15083,
+     "name": "Wicked Leather Gauntlets",
+     "quality": 2,
+     "itemLevel": 52,
+     "icon": "inv_gauntlets_31"
+    },
+    {
+     "slot": 10,
+     "id": 7552,
+     "name": "Falcon's Hook",
+     "quality": 2,
+     "itemLevel": 44,
+     "icon": "inv_jewelry_ring_10"
+    },
+    {
+     "slot": 11,
+     "id": 9533,
+     "name": "Masons Fraternity Ring",
+     "quality": 3,
+     "itemLevel": 47,
+     "icon": "inv_jewelry_ring_03"
+    },
+    {
+     "slot": 12,
+     "id": 11122,
+     "name": "Carrot on a Stick",
+     "quality": 2,
+     "itemLevel": 50,
+     "icon": "inv_misc_food_54"
+    },
+    {
+     "slot": 13,
+     "id": 18706,
+     "name": "Arena Master",
+     "quality": 2,
+     "itemLevel": 40,
+     "icon": "inv_misc_armorkit_14"
+    },
+    {
+     "slot": 14,
+     "id": 4114,
+     "name": "Darktide Cape",
+     "quality": 2,
+     "itemLevel": 42,
+     "icon": "inv_misc_cape_06"
+    },
+    {
+     "slot": 15,
+     "id": 10823,
+     "name": "Vanquisher's Sword",
+     "quality": 3,
+     "itemLevel": 44,
+     "icon": "inv_sword_35"
+    },
+    {
+     "slot": 16,
+     "id": 19040,
+     "name": "Zorbin's Mega-Slicer",
+     "quality": 2,
+     "itemLevel": 48,
+     "icon": "inv_sword_36"
+    },
+    {
+     "slot": 17,
+     "id": 13040,
+     "name": "Heartseeking Crossbow",
+     "quality": 3,
+     "itemLevel": 56,
+     "icon": "inv_weapon_crossbow_04"
+    },
+    {
+     "slot": 18,
+     "id": 5976,
+     "name": "Guild Tabard",
+     "quality": 1,
+     "itemLevel": 1,
+     "icon": "inv_shirt_guildtabard_01"
+    }
+   ],
+   "heal": 0,
+   "spec": "Beast Mastery",
+   "role": "dps",
+   "exalted": [],
+   "avatar": true,
+   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/47/86547503-main-raw.png"
+  },
+  {
    "name": "Stabbycreek",
    "id": 73888879,
    "level": 54,
@@ -82968,198 +83160,6 @@
    "exalted": [],
    "avatar": true,
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/225/67580385-main-raw.png"
-  },
-  {
-   "name": "Sliceandshot",
-   "id": 86547503,
-   "level": 53,
-   "rank": 6,
-   "cls": "hunter",
-   "race": 4,
-   "profile": true,
-   "gender": 0,
-   "lastLogin": 1792351552000,
-   "ilvl": 47,
-   "xp": 69058,
-   "title": null,
-   "hp": 2820,
-   "power": 2940,
-   "powerType": "Mana",
-   "stats": {
-    "strength": 49,
-    "agility": 270,
-    "stamina": 185,
-    "intellect": 114,
-    "spirit": 62,
-    "attack_power": 433,
-    "spell_power": 0,
-    "armor": 1703,
-    "melee_crit": 4.19,
-    "ranged_crit": 10.83,
-    "spell_crit": 5.73
-   },
-   "hk": 0,
-   "pvpRank": 0,
-   "gear": [
-    {
-     "slot": 0,
-     "id": 15086,
-     "name": "Wicked Leather Headband",
-     "quality": 2,
-     "itemLevel": 56,
-     "icon": "inv_misc_bandage_13"
-    },
-    {
-     "slot": 1,
-     "id": 12039,
-     "name": "Tundra Necklace of the Monkey",
-     "quality": 2,
-     "itemLevel": 33,
-     "icon": "inv_jewelry_necklace_11"
-    },
-    {
-     "slot": 2,
-     "id": 7459,
-     "name": "Knight's Pauldrons of the Monkey",
-     "quality": 2,
-     "itemLevel": 38,
-     "icon": "inv_shoulder_27"
-    },
-    {
-     "slot": 3,
-     "id": 148,
-     "name": "Rugged Trapper's Shirt",
-     "quality": 1,
-     "itemLevel": 1,
-     "icon": "inv_shirt_01"
-    },
-    {
-     "slot": 4,
-     "id": 8175,
-     "name": "Nightscape Tunic",
-     "quality": 2,
-     "itemLevel": 41,
-     "icon": "inv_chest_leather_03"
-    },
-    {
-     "slot": 5,
-     "id": 19125,
-     "name": "Seared Mail Girdle",
-     "quality": 2,
-     "itemLevel": 49,
-     "icon": "inv_belt_16"
-    },
-    {
-     "slot": 6,
-     "id": 15087,
-     "name": "Wicked Leather Pants",
-     "quality": 2,
-     "itemLevel": 58,
-     "icon": "inv_pants_12"
-    },
-    {
-     "slot": 7,
-     "id": 14653,
-     "name": "Scorpashi Slippers",
-     "quality": 2,
-     "itemLevel": 46,
-     "icon": "inv_boots_01"
-    },
-    {
-     "slot": 8,
-     "id": 16681,
-     "name": "Beaststalker's Bindings",
-     "quality": 3,
-     "itemLevel": 57,
-     "icon": "inv_bracer_17"
-    },
-    {
-     "slot": 9,
-     "id": 15083,
-     "name": "Wicked Leather Gauntlets",
-     "quality": 2,
-     "itemLevel": 52,
-     "icon": "inv_gauntlets_31"
-    },
-    {
-     "slot": 10,
-     "id": 7552,
-     "name": "Falcon's Hook",
-     "quality": 2,
-     "itemLevel": 44,
-     "icon": "inv_jewelry_ring_10"
-    },
-    {
-     "slot": 11,
-     "id": 9533,
-     "name": "Masons Fraternity Ring",
-     "quality": 3,
-     "itemLevel": 47,
-     "icon": "inv_jewelry_ring_03"
-    },
-    {
-     "slot": 12,
-     "id": 11122,
-     "name": "Carrot on a Stick",
-     "quality": 2,
-     "itemLevel": 50,
-     "icon": "inv_misc_food_54"
-    },
-    {
-     "slot": 13,
-     "id": 18706,
-     "name": "Arena Master",
-     "quality": 2,
-     "itemLevel": 40,
-     "icon": "inv_misc_armorkit_14"
-    },
-    {
-     "slot": 14,
-     "id": 4114,
-     "name": "Darktide Cape",
-     "quality": 2,
-     "itemLevel": 42,
-     "icon": "inv_misc_cape_06"
-    },
-    {
-     "slot": 15,
-     "id": 10823,
-     "name": "Vanquisher's Sword",
-     "quality": 3,
-     "itemLevel": 44,
-     "icon": "inv_sword_35"
-    },
-    {
-     "slot": 16,
-     "id": 19040,
-     "name": "Zorbin's Mega-Slicer",
-     "quality": 2,
-     "itemLevel": 48,
-     "icon": "inv_sword_36"
-    },
-    {
-     "slot": 17,
-     "id": 13040,
-     "name": "Heartseeking Crossbow",
-     "quality": 3,
-     "itemLevel": 56,
-     "icon": "inv_weapon_crossbow_04"
-    },
-    {
-     "slot": 18,
-     "id": 5976,
-     "name": "Guild Tabard",
-     "quality": 1,
-     "itemLevel": 1,
-     "icon": "inv_shirt_guildtabard_01"
-    }
-   ],
-   "heal": 0,
-   "spec": "Beast Mastery",
-   "role": "dps",
-   "exalted": [],
-   "avatar": true,
-   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/47/86547503-main-raw.png"
   },
   {
    "name": "Ussekare",
@@ -99074,25 +99074,25 @@
    "race": 1,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792356831000,
+   "lastLogin": 1792384694000,
    "ilvl": 40,
-   "xp": 98164,
+   "xp": 100514,
    "title": null,
-   "hp": 1913,
-   "power": 3802,
+   "hp": 1333,
+   "power": 3412,
    "powerType": "Mana",
    "stats": {
-    "strength": 41,
-    "agility": 44,
-    "stamina": 133,
-    "intellect": 204,
-    "spirit": 199,
-    "attack_power": 171,
+    "strength": 36,
+    "agility": 39,
+    "stamina": 75,
+    "intellect": 178,
+    "spirit": 173,
+    "attack_power": 26,
     "spell_power": 59,
-    "armor": 1444,
-    "melee_crit": 6.43,
-    "ranged_crit": 10.63,
-    "spell_crit": 15.72
+    "armor": 489,
+    "melee_crit": 1.12,
+    "ranged_crit": 5.32,
+    "spell_crit": 5.09
    },
    "hk": 0,
    "pvpRank": 0,
@@ -107882,9 +107882,9 @@
    "race": 3,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792347157000,
+   "lastLogin": 1792374456000,
    "ilvl": 31,
-   "xp": 63886,
+   "xp": 72057,
    "title": null,
    "hp": 1518,
    "power": 1425,
@@ -108858,9 +108858,9 @@
    "race": 1,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792347157000,
+   "lastLogin": 1792374462000,
    "ilvl": 28,
-   "xp": 10197,
+   "xp": 24080,
    "title": null,
    "hp": 1701,
    "power": 100,
@@ -108871,7 +108871,7 @@
     "stamina": 136,
     "intellect": 32,
     "spirit": 45,
-    "attack_power": 364,
+    "attack_power": 453,
     "spell_power": 0,
     "armor": 1208,
     "melee_crit": 10.3,
@@ -129689,6 +129689,126 @@
    "exalted": null,
    "avatar": true,
    "renderUrl": null
+  },
+  {
+   "name": "Haadod",
+   "id": 28246305,
+   "level": 16,
+   "rank": 9,
+   "cls": "hunter",
+   "race": 3,
+   "profile": true,
+   "gender": 1,
+   "lastLogin": 1792368597000,
+   "ilvl": 9,
+   "xp": 9106,
+   "title": null,
+   "hp": 477,
+   "power": 595,
+   "powerType": "Mana",
+   "stats": {
+    "strength": 29,
+    "agility": 44,
+    "stamina": 50,
+    "intellect": 35,
+    "spirit": 33,
+    "attack_power": 85,
+    "spell_power": 0,
+    "armor": 357,
+    "melee_crit": 3.47,
+    "ranged_crit": 3.99,
+    "spell_crit": 5.23
+   },
+   "hk": 0,
+   "pvpRank": 0,
+   "gear": [
+    {
+     "slot": 3,
+     "id": 148,
+     "name": "Rugged Trapper's Shirt",
+     "quality": 1,
+     "itemLevel": 1,
+     "icon": "inv_shirt_01"
+    },
+    {
+     "slot": 4,
+     "id": 9749,
+     "name": "Simple Blouse of the Eagle",
+     "quality": 2,
+     "itemLevel": 15,
+     "icon": "inv_shirt_05"
+    },
+    {
+     "slot": 5,
+     "id": 6379,
+     "name": "Inscribed Leather Belt",
+     "quality": 2,
+     "itemLevel": 17,
+     "icon": "inv_belt_26"
+    },
+    {
+     "slot": 6,
+     "id": 9756,
+     "name": "Gypsy Trousers of Agility",
+     "quality": 2,
+     "itemLevel": 14,
+     "icon": "inv_pants_05"
+    },
+    {
+     "slot": 7,
+     "id": 2309,
+     "name": "Embossed Leather Boots",
+     "quality": 2,
+     "itemLevel": 15,
+     "icon": "inv_boots_05"
+    },
+    {
+     "slot": 8,
+     "id": 9777,
+     "name": "Bandit Bracers of the Owl",
+     "quality": 2,
+     "itemLevel": 19,
+     "icon": "inv_bracer_05"
+    },
+    {
+     "slot": 9,
+     "id": 6554,
+     "name": "Bard's Gloves of the Eagle",
+     "quality": 2,
+     "itemLevel": 17,
+     "icon": "inv_gauntlets_15"
+    },
+    {
+     "slot": 14,
+     "id": 3511,
+     "name": "Cloak of the People's Militia",
+     "quality": 2,
+     "itemLevel": 15,
+     "icon": "inv_misc_cape_14"
+    },
+    {
+     "slot": 15,
+     "id": 1566,
+     "name": "Edge of the People's Militia",
+     "quality": 2,
+     "itemLevel": 17,
+     "icon": "inv_sword_25"
+    },
+    {
+     "slot": 17,
+     "id": 4362,
+     "name": "Rough Boomstick",
+     "quality": 2,
+     "itemLevel": 10,
+     "icon": "inv_weapon_rifle_03"
+    }
+   ],
+   "heal": 0,
+   "spec": "Beast Mastery",
+   "role": "dps",
+   "exalted": [],
+   "avatar": true,
+   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/33/28246305-main-raw.png"
   },
   {
    "name": "Nesrine",
