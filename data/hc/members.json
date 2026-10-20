@@ -1,7 +1,7 @@
 {
  "guild": "Frienship",
  "realm": "stitches",
- "generated": "2026-10-20 01:02",
+ "generated": "2026-10-20 05:53",
  "members": [
   {
    "name": "Abinadi",
@@ -34867,190 +34867,6 @@
    "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/220/30229468-main-raw.png"
   },
   {
-   "name": "Kikk",
-   "id": 28857937,
-   "level": 60,
-   "rank": 9,
-   "cls": "rogue",
-   "race": 1,
-   "profile": true,
-   "gender": 0,
-   "lastLogin": 1792450560000,
-   "ilvl": 56,
-   "xp": 0,
-   "title": null,
-   "hp": 4023,
-   "power": 100,
-   "powerType": "Energy",
-   "stats": {
-    "strength": 140,
-    "agility": 325,
-    "stamina": 256,
-    "intellect": 50,
-    "spirit": 110,
-    "attack_power": 679,
-    "spell_power": 0,
-    "armor": 2019,
-    "melee_crit": 21.61,
-    "ranged_crit": 19.81,
-    "spell_crit": 0.0
-   },
-   "hk": 0,
-   "pvpRank": 0,
-   "gear": [
-    {
-     "slot": 0,
-     "id": 13404,
-     "name": "Mask of the Unforgiven",
-     "quality": 3,
-     "itemLevel": 57,
-     "icon": "inv_misc_bandana_01"
-    },
-    {
-     "slot": 1,
-     "id": 15411,
-     "name": "Mark of Fordring",
-     "quality": 3,
-     "itemLevel": 63,
-     "icon": "inv_jewelry_talisman_07"
-    },
-    {
-     "slot": 2,
-     "id": 13358,
-     "name": "Wyrmtongue Shoulders",
-     "quality": 3,
-     "itemLevel": 63,
-     "icon": "inv_shoulder_24"
-    },
-    {
-     "slot": 3,
-     "id": 2575,
-     "name": "Red Linen Shirt",
-     "quality": 1,
-     "itemLevel": 10,
-     "icon": "inv_shirt_red_01"
-    },
-    {
-     "slot": 4,
-     "id": 18478,
-     "name": "Hyena Hide Jerkin",
-     "quality": 2,
-     "itemLevel": 60,
-     "icon": "inv_chest_leather_06"
-    },
-    {
-     "slot": 5,
-     "id": 16827,
-     "name": "Nightslayer Belt",
-     "quality": 4,
-     "itemLevel": 66,
-     "icon": "inv_belt_23"
-    },
-    {
-     "slot": 6,
-     "id": 8300,
-     "name": "Traveler's Leggings",
-     "quality": 2,
-     "itemLevel": 60,
-     "icon": "inv_pants_06"
-    },
-    {
-     "slot": 7,
-     "id": 13210,
-     "name": "Pads of the Dread Wolf",
-     "quality": 3,
-     "itemLevel": 60,
-     "icon": "inv_boots_wolf"
-    },
-    {
-     "slot": 8,
-     "id": 22004,
-     "name": "Darkmantle Bracers",
-     "quality": 3,
-     "itemLevel": 65,
-     "icon": "inv_bracer_07"
-    },
-    {
-     "slot": 9,
-     "id": 22006,
-     "name": "Darkmantle Gloves",
-     "quality": 4,
-     "itemLevel": 55,
-     "icon": "inv_gauntlets_24"
-    },
-    {
-     "slot": 10,
-     "id": 18500,
-     "name": "Tarnished Elven Ring",
-     "quality": 3,
-     "itemLevel": 61,
-     "icon": "inv_jewelry_ring_13"
-    },
-    {
-     "slot": 11,
-     "id": 18500,
-     "name": "Tarnished Elven Ring",
-     "quality": 3,
-     "itemLevel": 61,
-     "icon": "inv_jewelry_ring_13"
-    },
-    {
-     "slot": 12,
-     "id": 12846,
-     "name": "Argent Dawn Commission",
-     "quality": 1,
-     "itemLevel": 1,
-     "icon": "inv_jewelry_talisman_07"
-    },
-    {
-     "slot": 13,
-     "id": 12065,
-     "name": "Ward of the Elements",
-     "quality": 2,
-     "itemLevel": 60,
-     "icon": "inv_jewelry_talisman_02"
-    },
-    {
-     "slot": 14,
-     "id": 15789,
-     "name": "Deep River Cloak",
-     "quality": 2,
-     "itemLevel": 56,
-     "icon": "inv_misc_cape_16"
-    },
-    {
-     "slot": 15,
-     "id": 22378,
-     "name": "Ravenholdt Slicer",
-     "quality": 3,
-     "itemLevel": 65,
-     "icon": "inv_sword_38"
-    },
-    {
-     "slot": 16,
-     "id": 17705,
-     "name": "Thrash Blade",
-     "quality": 3,
-     "itemLevel": 53,
-     "icon": "inv_sword_36"
-    },
-    {
-     "slot": 17,
-     "id": 12653,
-     "name": "Riphook",
-     "quality": 3,
-     "itemLevel": 59,
-     "icon": "inv_weapon_bow_08"
-    }
-   ],
-   "heal": 0,
-   "spec": "Combat",
-   "role": "dps",
-   "exalted": [],
-   "avatar": true,
-   "renderUrl": "https://render.worldofwarcraft.com/classic1x-eu/character/stitches/81/28857937-main-raw.png"
-  },
-  {
    "name": "Kinde",
    "id": 40024945,
    "level": 60,
@@ -45455,7 +45271,7 @@
    "race": 1,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792440438000,
+   "lastLogin": 1792474909000,
    "ilvl": 57,
    "xp": 0,
    "title": null,
@@ -52516,7 +52332,7 @@
    "race": 1,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792438903000,
+   "lastLogin": 1792473680000,
    "ilvl": 59,
    "xp": 0,
    "title": null,
@@ -57632,7 +57448,7 @@
    "race": 7,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792250702000,
+   "lastLogin": 1792469196000,
    "ilvl": 56,
    "xp": 0,
    "title": null,
@@ -57648,8 +57464,8 @@
     "attack_power": 662,
     "spell_power": 0,
     "armor": 3949,
-    "melee_crit": 17.8,
-    "ranged_crit": 10.52,
+    "melee_crit": 19.8,
+    "ranged_crit": 12.52,
     "spell_crit": 0.0
    },
    "hk": 0,
@@ -57753,11 +57569,11 @@
     },
     {
      "slot": 12,
-     "id": 11122,
-     "name": "Carrot on a Stick",
-     "quality": 2,
-     "itemLevel": 50,
-     "icon": "inv_misc_food_54"
+     "id": 13965,
+     "name": "Blackhand's Breadth",
+     "quality": 3,
+     "itemLevel": 63,
+     "icon": "inv_misc_armorkit_09"
     },
     {
      "slot": 13,
@@ -63452,7 +63268,7 @@
    "race": 1,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792426569000,
+   "lastLogin": 1792473669000,
    "ilvl": 55,
    "xp": 0,
    "title": null,
@@ -64324,7 +64140,7 @@
    "race": 4,
    "profile": true,
    "gender": 0,
-   "lastLogin": 1792432080000,
+   "lastLogin": 1792474442000,
    "ilvl": 58,
    "xp": 0,
    "title": null,
@@ -85467,9 +85283,9 @@
    "race": 3,
    "profile": true,
    "gender": 1,
-   "lastLogin": 1792455167000,
-   "ilvl": 46,
-   "xp": 336,
+   "lastLogin": 1792464549000,
+   "ilvl": 47,
+   "xp": 50011,
    "title": null,
    "hp": 2411,
    "power": 2129,
@@ -85482,8 +85298,8 @@
     "spirit": 63,
     "attack_power": 651,
     "spell_power": 0,
-    "armor": 2538,
-    "melee_crit": 5.88,
+    "armor": 2568,
+    "melee_crit": 6.0,
     "ranged_crit": 1.0,
     "spell_crit": 9.98
    },
@@ -85540,11 +85356,11 @@
     },
     {
      "slot": 6,
-     "id": 9970,
-     "name": "Embossed Plate Leggings of the Bear",
+     "id": 19124,
+     "name": "Slagplate Leggings",
      "quality": 2,
-     "itemLevel": 44,
-     "icon": "inv_pants_06"
+     "itemLevel": 48,
+     "icon": "inv_pants_04"
     },
     {
      "slot": 7,
